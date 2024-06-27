@@ -1,0 +1,40 @@
+.AddDish-Box-Content {
+    background-color: #fefefe;
+    z-index: 3;
+    border: 1px solid black;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: 27%;
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.AddDish-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.AddDish-InputBox{
+    display: grid;
+}
+
+/* .AddDishPage-Input {
+    direction: rtl;
+} */
+
+.AddDish-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.AddDish-Buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddDish-Buttons{
+    padding: 15px;
+}

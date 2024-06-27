@@ -1,0 +1,17 @@
+.UpdatePersonalInformations-Box-Content {
+    background-color: #fefefe;
+    z-index: 2;
+    border: 1px solid black;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: 27%;
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.UpdateUser-Button{
+    margin: 5px;
+    width: max-content;
+}

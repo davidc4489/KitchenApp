@@ -1,0 +1,56 @@
+.UpdateMenu-Box-Content {
+    background-color: #fefefe;
+    z-index: 2;
+    border: 1px solid black;
+    border-radius: 25px;
+    height: 95vh;
+    min-width: 30%;
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+}
+
+.UpdateMenu-Box-Content::-webkit-scrollbar {
+    width: 0px;
+}
+
+.UpdateMenu-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.UpdateMenu-InputBox{
+    display: grid;
+}
+
+.UpdateMenuPage-Input {
+    direction: rtl;
+}
+
+.UpdateMenu-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateMenu-Checkbox{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateMenu-Buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+}
+
+.UpdateMenu-Button{
+    margin: 5px;
+    width: max-content;
+}
+
+.UpdateDish-Button {
+    justify-self: center;
+}

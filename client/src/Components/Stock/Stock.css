@@ -1,0 +1,99 @@
+.Stock{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.Stock-Page {
+    width: 90.9vw;
+}
+
+.StockPage-Buttons{
+    width: 90.9vw;
+    justify-content: space-around;
+    display: flex;
+    background: grey;
+}
+
+.StockPage-Button{
+    width: 24vw;
+    background: grey;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.StockPage-Button:hover{
+    background: lightgrey;
+}
+
+.StockPage-AddProduct-Button{
+    width: 22vw;
+    background: rgb(43, 43, 44);
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.StockPage-AddProduct-Button:hover{
+    background: lightgrey;
+}
+
+.StockPage-SearchBox{
+    text-align: center;
+}
+
+.StockPage-SearchBox-Input{
+    width: 20vw;
+    margin: 20px;
+    padding: 1px;
+    direction: rtl;
+}
+
+.Stock-TitlePage{
+    text-align: center;
+    padding: 10px;
+}
+
+.Stock-Header{
+    width: 11.2vw;
+    min-width: fit-content;
+}
+
+.Stock-Headers {
+    width: 100%;
+    background-color: white;
+    display: inline-flex;
+    grid-template-columns: repeat(9, 1fr);
+    text-align: center;
+    font-weight: bolder;
+  }
+
+.Stock-ProductRow {
+    background-color: white;
+    display: inline-flex;
+    grid-template-columns: repeat(9, 1fr);
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+  }
+
+.Stock-row-field{
+    width:11.2vw
+}
+
+.Stock-row-field-Alert{
+    width:11.2vw;
+    color: red;
+}
+
+/* #בשרי {
+    color: red;
+}
+
+#חלבי {
+    color: blue;
+} */

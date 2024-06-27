@@ -1,0 +1,82 @@
+.Suppliers{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.SuppliersPage-Buttons{
+    width: 90.9vw;
+    justify-content: space-around;
+    display: flex;
+    background: grey;
+}
+
+.SuppliersPage-Button{
+    width: 24vw;
+    background: grey;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.SuppliersPage-Button:hover{
+    background: lightgrey;
+}
+
+.SuppliersPage-AddSupplier-Button{
+    width: 20vw;
+    background: rgb(43, 43, 44);
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.SuppliersPage-AddSupplier-Button:hover{
+    background: lightgrey;
+}
+
+.SuppliersPage-SearchBox{
+    text-align: center;
+    direction: rtl;
+}
+
+.SuppliersPage-SearchBox-Input{
+    width: 20vw;
+    margin: 20px;
+    padding: 1px;
+}
+
+.Suppliers-TitlePage{
+    text-align: center;
+    padding: 10px;
+}
+
+.Suppliers-Headers {
+    background-color: white;
+    display: inline-flex;
+    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+    font-weight: bolder;
+    width: 100%;
+  }
+
+.Suppliers-Header{
+    width: 10.1vw;
+    min-width: fit-content;
+}
+
+.Suppliers-SupplierRow {
+    background-color: white;
+    display: inline-flex;
+    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+  }
+
+.Suppliers-row-field{
+    width: 10.1vw;
+}

@@ -1,0 +1,54 @@
+.UpdateUser-box {
+    position: fixed;
+    /* z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: right;
+}
+
+.UpdateUser-Box-Content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 20%;
+}
+
+.UpdateUser-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.UpdateUser-InputBox{
+    display: grid;
+}
+
+.UpdateUserPage-Input {
+    direction: rtl;
+}
+
+.UpdateUser-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateUser-Checkbox{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateUser-Buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+}
+
+.UpdateUser-Button{
+    margin: 5px;
+    width: max-content;
+}

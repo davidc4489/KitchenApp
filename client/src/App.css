@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+.App {
+    /* display: flex;
+    direction: rtl; */
+}
+
+.layout-container {
+    display: flex;
+    display: flex;
+    direction: rtl;
+    height: 100vh; /* Make the container take up the full height of the viewport */
+  }
+  
+  .outlet-container {
+    flex-grow: 1; /* Allow the outlet container to grow and take up the remaining space */
+    position: fixed; /* Set the position to fixed */
+    top: 0;
+    right: 12.1vw; /* Adjust left position based on the sidebar width */
+    left: 0;
+    bottom: 0;
+    overflow: auto; /* Allow for scrolling if the content overflows */
+  }

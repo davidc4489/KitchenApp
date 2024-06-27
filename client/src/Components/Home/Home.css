@@ -1,0 +1,32 @@
+.Home-Titles{
+    position: fixed;
+    width: 80vw;
+    min-width: max-content;
+    padding-top: 30vh;
+    padding-right: 5vw;
+    text-align: center;
+}
+
+.Home-FirstTitle{
+    margin-bottom: 40px;
+    font-size: 45px;
+    min-width: max-content;
+}
+
+.Home-SecondTitle{
+    margin-bottom: 40px;
+    font-size: 35px;
+    color: brown;
+    font-style: italic;
+    min-width: max-content;
+}
+
+.Home-ThirdTitle{
+    font-size: 30px;
+    color: grey;
+    min-width: max-content;
+}
+
+.Home-LogoTitle{
+    color:lightskyblue
+}

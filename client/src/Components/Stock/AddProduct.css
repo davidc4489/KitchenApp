@@ -1,0 +1,52 @@
+.AddProduct-box {
+    position: fixed;
+    /* z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: right;
+}
+
+.AddProduct-Box-Content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 20%;
+    display: grid;
+}
+
+.AddProduct-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.AddProduct-InputBox{
+    display: grid;
+}
+
+.AddProductPage-Input {
+    direction: rtl;
+}
+
+select {
+    direction: rtl;
+}
+
+.AddProduct-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.AddProduct-Buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddProduct-Buttons{
+    padding: 15px;
+}

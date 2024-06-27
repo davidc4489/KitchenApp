@@ -1,0 +1,50 @@
+.DishesPage-Buttons{
+    display: flex;
+    place-content: space-between;
+}
+
+.DishesPage-Button{
+    background: grey;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.MenuPage-Button:hover{
+    background: lightgrey;
+}
+
+.DishesPage-AddDish-Button{
+    background: rgb(43, 43, 44);
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.DishesPage-AddDish-Button:hover{
+    background: lightgrey;
+}
+
+.Dishes-TitlePage{
+    text-align: center;
+    padding: 10px;
+}
+
+.DishesPage-SearchBox{
+    text-align: center;
+    direction: rtl;
+}
+
+.NoAccessAlert{
+    position: absolute;
+    top: 50%;
+    right: 39%;
+    font-size: 30px;
+    color: lightslategrey;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}

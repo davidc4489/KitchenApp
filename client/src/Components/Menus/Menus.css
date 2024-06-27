@@ -1,0 +1,50 @@
+.MenusPage-Buttons{
+    display: flex;
+    place-content: space-between;
+}
+
+.MenusPage-Button{
+    background: grey;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.MenusPage-Button:hover{
+    background: lightgrey;
+}
+
+.MenusPage-AddMenu-Button{
+    background: rgb(43, 43, 44);
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.MenusPage-AddDish-Button:hover{
+    background: lightgrey;
+}
+
+.Menus-TitlePage{
+    text-align: center;
+    padding: 10px;
+}
+
+.MenusPage-SearchBox{
+    text-align: center;
+    direction: rtl;
+}
+
+.firstCell {
+    padding-right: 5vw;
+}
+
+.table>:not(caption)>*>* {
+    padding-right: 5vw;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}

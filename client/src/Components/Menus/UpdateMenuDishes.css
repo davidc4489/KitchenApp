@@ -1,0 +1,36 @@
+.ingredientItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 3%;
+    z-index: 4;
+    border-bottom: 1px solid grey;
+}
+
+.UpdateDish-box{
+    z-index: 4;
+
+}
+
+.UpdateMenuDishes-Box-Content {
+    background-color: #fefefe;
+    z-index: 2;
+    border: 1px solid black;
+    border-radius: 25px;
+    height: 80vh; /* Utilisation de la hauteur de la vue (viewport height) à 80%, ajustez selon vos besoins */
+    width: 37%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto; /* Activation du défilement vertical si le contenu dépasse la hauteur spécifiée */
+}
+
+.UpdateMenuDishes-Buttons{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+}
+
+.add-ingredient-button {
+    justify-self: center;
+}

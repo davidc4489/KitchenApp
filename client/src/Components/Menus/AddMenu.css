@@ -1,0 +1,35 @@
+.AddMenu-Box-Content {
+    background-color: #fefefe;
+    z-index: 2;
+    border: 1px solid black;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: 27%;
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.AddMenu-Title{
+    text-align: center;
+    font-size: 22px;
+}
+
+.AddMenu-InputBox{
+    display: grid;
+}
+
+.AddMenu-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.AddMenu-Buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddMenu-Buttons{
+    padding: 15px;
+}

@@ -1,0 +1,71 @@
+.AddNote-box {
+    position: fixed;
+    /* z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: right;
+}
+
+.AddNote-Box-Content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 20%;
+    border-radius: 10px;
+}
+
+.AddNote-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.AddNote-InputBox{
+    display: grid;
+}
+
+.AddNotePage-Input {
+    direction: rtl;
+}
+
+.AddNote-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.AddNote-Buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddNote-Buttons{
+    padding: 15px;
+}
+
+.AddNotePage-Input {
+    border: none;
+    padding-right: 1vw;
+}
+
+.AddNotePage-Input:focus-visible {
+    outline: none;
+}
+
+.AddNotePage-TextArea {
+    border: none;
+    direction: rtl;
+    height: 10vh;
+    margin-top: 2vh;
+    padding-right: 1vw;
+    max-width: 40vh;
+    min-width: 40vh;
+}
+
+.AddNotePage-TextArea:focus-visible {
+    outline: none;
+}

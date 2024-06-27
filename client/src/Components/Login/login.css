@@ -1,0 +1,28 @@
+.loginbox {
+    border: 1px solid black;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: fit-content;
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.titlelogin{
+    font-family: Inter;
+    font-size: 22px;
+    font-weight: 800;
+    text-align: center;
+    padding-top: 2%;
+}
+
+.alert-danger {
+    justify-content: center;
+    display: flex;
+}
+
+.alert-success {
+    justify-content: center;
+    display: flex;
+}

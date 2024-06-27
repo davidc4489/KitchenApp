@@ -1,0 +1,52 @@
+.AddSupplier-box {
+    position: fixed;
+    /* z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: right;
+}
+
+.AddSupplier-Box-Content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 20%;
+    display: grid;
+}
+
+.AddSupplier-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.AddSupplier-InputBox{
+    display: grid;
+}
+
+.AddSupplierPage-Input {
+    direction: rtl;
+}
+
+select {
+    direction: rtl;
+}
+
+.AddSupplier-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.AddSupplier-Buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddSupplier-Buttons{
+    padding: 15px;
+}

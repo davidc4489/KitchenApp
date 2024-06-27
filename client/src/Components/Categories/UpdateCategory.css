@@ -1,0 +1,54 @@
+.UpdateCategory-box {
+    position: fixed;
+    /* z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: right;
+}
+
+.UpdateCategory-Box-Content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 20%;
+}
+
+.UpdateCategory-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.UpdateCategory-InputBox{
+    display: grid;
+}
+
+.UpdateCategory-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateCategoryPage-Input {
+    direction: rtl;
+}
+
+.UpdateCategory-Checkbox{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateCategory-Buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+}
+
+.UpdateCategory-Button{
+    margin: 5px;
+    width: max-content;
+}

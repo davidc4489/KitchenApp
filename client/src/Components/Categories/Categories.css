@@ -1,0 +1,99 @@
+.Categories{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.Categories-Page {
+    width: 90.9vw;
+}
+
+.CategoriesPage-Buttons{
+    width: 90.9vw;
+    justify-content: space-around;
+    display: flex;
+    background: grey;
+}
+
+.CategoriesPage-Button{
+    width: 20vw;
+    background: grey;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.CategoriesPage-Button:hover{
+    background: lightgrey;
+}
+
+.CategoriesPage-AddCategory-Button{
+    width: 20vw;
+    background: rgb(43, 43, 44);
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.CategoriesPage-AddDish-Button:hover{
+    background: lightgrey;
+}
+
+.Categories-TitlePage{
+    text-align: center;
+    padding: 10px;
+}
+
+.CategoriesPage-SearchBox{
+    text-align: center;
+    direction: rtl;
+}
+
+.CategoriesPage-SearchBox-Input{
+    width: 20vw;
+    margin: 20px;
+    padding: 1px;
+}
+
+.Categories-Headers {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+    font-weight: bolder;
+    margin: auto;
+    width: 50vw;
+  }
+
+.Categories-Header{
+    width:17vw
+}
+
+.Categories-CategoryRow {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+    width: 50vw;
+    border: none;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+.Category-row-field{
+    width:17vw
+}
+
+.StockRow {
+    background-color: lightcyan;
+}
+
+.DishRow {
+    background-color: lightpink;
+}
+
+.MenuRow {
+    background-color: rgb(245, 241, 188);
+}

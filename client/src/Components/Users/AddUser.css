@@ -1,0 +1,43 @@
+.AddUser-box {
+    position: fixed;
+    /* z-index: 1; */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: right;
+}
+
+.AddUser-Box-Content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid black;
+    width: 20%;
+}
+
+.AddUser-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.AddUser-InputBox{
+    display: grid;
+}
+
+.AddUser-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.AddUser-Buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.AddUser-Buttons{
+    padding: 15px;
+}

@@ -1,0 +1,73 @@
+.UpdateDish-Box-Content::-webkit-scrollbar {
+    width: 0px;
+}
+
+.UpdateDish-Box-Content {
+    background-color: #fefefe;
+    z-index: 2;
+    border: 1px solid black;
+    border-radius: 25px;
+    height: 95vh;
+    min-width: 30%;
+    position: fixed;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+}
+
+.UpdateDish-Title{
+    text-align: center;
+    font-size: 22px;
+    padding: 5px;
+}
+
+.UpdateDish-InputBox{
+    display: grid;
+}
+
+.UpdateDish-Label{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateDishPage-Input {
+    direction: rtl;
+}
+
+.UpdateDish-Checkbox{
+    text-align: center;
+    padding: 5px;
+}
+
+.UpdateDish-Buttons{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0px;
+}
+
+.UpdateDish-Button{
+    margin: 5px;
+    width: max-content;
+}
+
+.ingredientItem {
+    border-bottom: 1px solid grey;
+    direction: rtl;
+}
+
+.ingredientItem-Name {
+    width: 33%;
+}
+
+.ingredientItem-Amount {
+    width: 16%;
+}
+
+.ingredientItem-Unity {
+    width: 16%;
+}
+
+.add-ingredient-button {
+    justify-self: center;
+}

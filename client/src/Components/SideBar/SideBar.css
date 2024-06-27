@@ -1,0 +1,51 @@
+.SideBar{
+    background: rgb(43, 43, 44);
+    /* height: 100%; */
+    min-width: 12vw;
+    /* min-height: 33vh; */
+    color: white;
+    display: inline-table;
+}
+
+.SideBar-Logo{
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    padding: 6px;
+    border-bottom: 2px solid grey;
+}
+
+.SideBar-Logo-Restaurant{
+    color:lightskyblue
+}
+
+.SideBar-Button{
+    border: none;
+    width: 100%;
+    background-color: inherit;
+    color: lightgrey;
+    margin-top: 25px;
+    display: flex;
+    cursor: pointer;
+    direction: rtl;
+}
+
+.SideBar-Button:hover{
+    background: grey;
+}
+
+.SideBar-Title{
+    padding: 5px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.alert-icon{
+    padding-right: 10px;
+}
+
+.SideBar-Icon{
+    padding-right: 10px;
+}

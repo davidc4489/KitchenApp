@@ -1,0 +1,53 @@
+.Notes-NewNote-Button-Container {
+    width: 88w;
+    display: flex;
+    justify-content: center;
+}
+
+.Notes-NewNote-Button {
+    width: 45vw;
+    height: 6vh;
+    min-height: 25px;
+    background-color: white;
+    border: 1px solid lightgrey;
+    color: grey;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    border-radius: 10px;
+}
+
+.Notes-NewNote-Button:hover{
+    border: 1px solid grey;
+    cursor:text;
+}
+
+.Notes-Container {
+    display: flex;
+    padding: 1%;
+    direction: rtl;
+}
+
+.Note-Case{
+    border: 1px solid lightgrey;
+    padding: 1%;
+    margin: 1%;
+    border-radius: 5px;
+    flex-basis: min-content;
+    align-self: self-start;
+    background-color: white;
+}
+
+.Note-Case:hover{
+    border: 1px solid grey;
+    cursor:text;
+}
+
+.Note-Title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 10vw;
+    margin-bottom: 2vh;
+}
+
+.Note-Content {
+    text-align: start;
+}
