@@ -11,14 +11,20 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [permission, setPermission] = useState("");
+
+    // List of different existing authorizations
     const permissions = ['עובד', 'מנהל']
     
     const [showUpdatePersonalInformationsDialog, setShowUpdatePersonalInformationsDialog] = useState(false)
 
+    // Retrieves data and authentication functions from user context
     const { login, logout, user, access, accessAlert, setAccessAlert } = useAuth();
+
+    //  Get active user data from context
     const { name } = useUserUpdate();
 
     const submitHandler = (event) => {
+        // Check the user data with the context function
         login(email, password, permission)
         setEmail("");
         setPassword("");
@@ -42,8 +48,10 @@ const Login = () => {
         <>
         {showUpdatePersonalInformationsDialog ? <UpdatePersonalInformations OpenClose={openUpdatePersonalInformationsDialog}/> : null}  
         <div className='loginbox shadow-lg p-3 mb-5 bg-body rounded'>
+            {/* Case where no user identified */}
             {access !== true?
             <>
+                {/* Access alert is set to true by context when user data is incorrect */}
                 {(accessAlert) &&
                     <div className="alert alert-danger" role="alert">
                         שם משתמש או סיסמה לא תקין !
@@ -58,6 +66,7 @@ const Login = () => {
                 </form>
             </>
         :        
+            // Case where user identified
             <>
                     {(name !== null) &&
                         <div className="alert alert-success" role="alert">

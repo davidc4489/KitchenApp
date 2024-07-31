@@ -16,9 +16,9 @@ export const AuthProvider = ({ children }) => {
         .then(data => setData(data))
   }, [data])
 
-
   const {userSetter} = useUserUpdate();
 
+  // Function to check user data from the login page and update local storage accordingly
   const login = (mail, password, permission) => {
     let authenticatedUser = data.find(user => user.מייל === mail && user.סיסמה === password && user.הרשאה === permission)
 
