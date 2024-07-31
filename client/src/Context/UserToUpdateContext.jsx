@@ -10,7 +10,7 @@ export const UpdateUserProvider = ({ children }) => {
     const permission = localStorage.getItem("permission")
     const id = parseInt(localStorage.getItem("id"))
 
-
+  // Receive user data from user context
   const userSetter = (updatedUser) => {
     localStorage.setItem("name", updatedUser.שם)
     localStorage.setItem("email", updatedUser.מייל)

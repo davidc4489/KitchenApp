@@ -51,6 +51,7 @@ const Login = () => {
             {/* Case where no user identified */}
             {access !== true?
             <>
+                {/* Access alert is set to true by context when user data is incorrect */}
                 {(accessAlert) &&
                     <div className="alert alert-danger" role="alert">
                         שם משתמש או סיסמה לא תקין !
