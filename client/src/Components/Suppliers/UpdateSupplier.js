@@ -70,8 +70,8 @@ function UpdateSupplier(props) {
                     <select name='מוצר' className='user-select-input' onChange={updateData} value={updateValues.מוצר} >
                         <option value="">בחר מוצר</option>
                         {dataStock?.map((item) => (
-                            <option key={item.id} value={item.שם_מוצר}>
-                                {item.שם_מוצר}
+                            <option key={item.id} value={item.שם}>
+                                {item.שם}
                             </option> 
                         ))}
                     </select>

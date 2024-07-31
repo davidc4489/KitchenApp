@@ -91,7 +91,7 @@ function UpdateDishIngredients(props) {
                 <div className='UpdateDish-Title'>עריכת רכיבים</div>
                 <div className='UpdateDish-InputBox'>
                     <label className='AddMenu-Label'>: רכיבים</label>
-                    <Select id='category' value={updateValues.ingredients.id} onChange={setIngredientId} title='בחר רכיב' optionValue='בחר רכיב' optionsToMap={dataStock} valueToMap={"id"} valueToDisplay="שם_מוצר"/>
+                    <Select id='category' value={updateValues.ingredients.id} onChange={setIngredientId} title='בחר רכיב' optionValue='בחר רכיב' optionsToMap={dataStock} valueToMap={"id"} valueToDisplay="שם"/>
                     <label className='AddMenu-Label' htmlFor="ingredientAmount">: כמות</label> 
                     <Input type='number' className={"form-control w-25 p-1 mx-auto p-2"} value={ingredientAmount} onChange={setIngredientAmount} minValue={0}/>
                     <label className='AddMenu-Label'>: יחידה</label>
@@ -108,7 +108,7 @@ function UpdateDishIngredients(props) {
                                         ((updateValues.ingredients?.filter(value => (value.id == ingredient.idIngredient))).length == 0)
                                         )&&
                                     <div className='ingredientItem'>
-                                        <td className='ingredientItem-Name'>{item.שם_מוצר} :</td>
+                                        <td className='ingredientItem-Name'>{item.שם} :</td>
                                         <td className='ingredientItem-Amount'>{ingredient.כמות}</td>
                                         <td className='ingredientItem-Unity'>{ingredient.יחידה}</td>
                                     </div>))}
@@ -123,7 +123,7 @@ function UpdateDishIngredients(props) {
                                     {dataStock.map((item) => (
                                         ((item.id == ingredient.id) && (ingredient.amount>0))&&
                                     <div className='ingredientItem'>
-                                        <td className='ingredientItem-Name'>{item.שם_מוצר} :</td>
+                                        <td className='ingredientItem-Name'>{item.שם} :</td>
                                         <td className='ingredientItem-Amount'>{ingredient.amount}</td>
                                         <td className='ingredientItem-Unity'>{ingredient.unity}</td>
                                         <button className="btn btn-outline-danger btn-sm" onClick={(e) => removeIngredient(e, item.id)}>ביטול</button>

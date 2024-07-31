@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS stock (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        שם_מוצר VARCHAR (50) NOT NULL,
+        שם VARCHAR (50) NOT NULL,
         קטגוריה VARCHAR (50) NOT NULL,
         כשרות VARCHAR (50) NOT NULL,
         ספק VARCHAR (50) NOT NULL,
@@ -10,8 +10,10 @@ CREATE TABLE IF NOT EXISTS stock (
         כמות_מינימלית INTEGER DEFAULT 0
         );
 
-INSERT INTO stock(שם_מוצר, קטגוריה, כשרות, ספק, יצרן, כמות, יחידה, כמות_מינימלית)
-VALUES ('שוקולד', 'אוכל', 'חלבי', 'שוקו-שוקו', 'עילית', 25, 'ק"ג', 20) ;
+INSERT INTO stock(שם, קטגוריה, כשרות, ספק, יצרן, כמות, יחידה, כמות_מינימלית)
+VALUES ('עוף', 'אוכל', 'בשרי', 'עוף ירושלים', 'תנובה', 32, 'ק"ג', 17) ;
+
+DROP TABLE stock ;
 
 CREATE TABLE IF NOT EXISTS suppliers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

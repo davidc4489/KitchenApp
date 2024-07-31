@@ -14,7 +14,7 @@ export const getCategories = async (req, res) => {
 
 export const addProduct = (req, res) => {
     let newData = {
-        "שם_מוצר": req.body.שם_מוצר,
+        "שם": req.body.שם,
         "קטגוריה": req.body.קטגוריה,
         "כשרות": req.body.כשרות,
         "ספק": req.body.ספק,
@@ -24,14 +24,14 @@ export const addProduct = (req, res) => {
         "כמות_מינימלית": req.body.כמות_מינימלית
     }
     console.log(newData)
-    if (req.body.שם_מוצר && req.body.קטגוריה && req.body.כשרות && req.body.ספק && req.body.יצרן && req.body.כמות && req.body.יחידה && req.body.כמות_מינימלית){
+    if (req.body.שם && req.body.קטגוריה && req.body.כשרות && req.body.ספק && req.body.יצרן && req.body.כמות && req.body.יחידה && req.body.כמות_מינימלית){
         add('stock', newData)};
     res.send({ message: 'Data added ' });
 }
 
 export const updateProduct= (req,res) => {
     let newData = {id:req.params.id}
-    if (req.body.שם_מוצר){ newData.שם_מוצר = req.body.שם_מוצר}
+    if (req.body.שם){ newData.שם = req.body.שם}
     if (req.body.קטגוריה){ newData.קטגוריה = req.body.קטגוריה}
     if (req.body.כשרות){ newData.כשרות = req.body.כשרות}
     if (req.body.ספק){ newData.ספק = req.body.ספק}
@@ -40,7 +40,7 @@ export const updateProduct= (req,res) => {
     if (req.body.יחידה){ newData.יחידה = req.body.יחידה}
     if (req.body.כמות_מינימלית){ newData.כמות_מינימלית = req.body.כמות_מינימלית}
 
-    if (req.body.שם_מוצר && req.body.קטגוריה && req.body.כשרות && req.body.ספק && req.body.יצרן && req.body.כמות && req.body.יחידה && req.body.כמות_מינימלית){
+    if (req.body.שם && req.body.קטגוריה && req.body.כשרות && req.body.ספק && req.body.יצרן && req.body.כמות && req.body.יחידה && req.body.כמות_מינימלית){
         update('stock',newData)}
     res.send({ message: 'Data for STOCK ${id} updated successfully' });
 }

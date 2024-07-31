@@ -104,7 +104,7 @@ function UpdateDish(props) {
                             <div className='ingredientsList'>
                                 <div>{ingredient.יחידה}</div>
                                 <div>{ingredient.כמות}</div>
-                                <div>{product.שם_מוצר}</div>
+                                <div>{product.שם}</div>
                             </div>
                         ))))}
                     </div>

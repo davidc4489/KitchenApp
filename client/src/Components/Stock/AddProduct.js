@@ -4,7 +4,7 @@ import './AddProduct.css'
 function AddProduct(props) {
    
     const [addValues, setAddValues] = useState({
-        שם_מוצר: '',
+        שם: '',
         קטגוריה: '',
         ספק: '',
         יצרן: '',
@@ -45,7 +45,7 @@ function AddProduct(props) {
                 <div className='AddProduct-Title'>הוסף מוצר</div>
                 <div className='AddProduct-InputBox'>
                     <label className='AddProduct-Label'>שם: </label>
-                    <input className='AddProductPage-Input' type="text" name='שם_מוצר' value={addValues.שם_מוצר} onChange={updateData} required /> 
+                    <input className='AddProductPage-Input' type="text" name='שם' value={addValues.שם} onChange={updateData} required /> 
                     </div>
                     <label className='AddProduct-Label'>קטגוריה: </label>
                     <select name='קטגוריה' value={addValues.קטגוריה} onChange={updateData} required pattern=".*\S+.*" title="This field is required">

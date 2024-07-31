@@ -183,7 +183,7 @@ function SuppliersOrdersCalendar() {
                                                 (isMatchingDate(date, value))&&
                                                 (dataStock.map((product) => (
                                                     (product.id === date.idProduct)) &&
-                                                        <div className='todayMenu'>{date.amount} {product.שם_מוצר} {date.supplier}</div>
+                                                        <div className='todayMenu'>{date.amount} {product.שם} {date.supplier}</div>
                                                 ))))}
                                         </button>
                                     )}
