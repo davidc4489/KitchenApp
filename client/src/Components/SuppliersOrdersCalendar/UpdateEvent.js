@@ -59,7 +59,7 @@ function UpdateEvent (props) {
                     <select name='idProduct' className='UpdateEventPage-Input' value={updateValues.idProduct} onChange={updateData} required pattern=".*\S+.*" title="This field is required">
                         <option value=''>בחר מוצר</option>
                         {dataStock.map((item) => 
-                             <option key={item.id} value={item.id}>{item.שם_מוצר}</option>
+                             <option key={item.id} value={item.id}>{item.שם}</option>
                         )}
                     </select>
                     <input className='UpdateEventPage-Input' type="number" name='amount' value={updateValues.amount} onChange={updateData} required/>

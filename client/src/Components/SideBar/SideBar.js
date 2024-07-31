@@ -116,7 +116,7 @@ export default function Sidebar() {
             <button onClick={goToLogin} className='SideBar-Button'><img className='SideBar-Icon' src={login_icon} /><span className='SideBar-Title'>כניסה\יציאה</span></button>
             <button onClick={goToMenus} className='SideBar-Button'><img className='SideBar-Icon' src={menus_icon} /><span className='SideBar-Title'>תפריטים</span></button>
             <button onClick={goToDishes} className='SideBar-Button'><img className='SideBar-Icon' src={dishes_icon} /><span className='SideBar-Title'>מנות</span></button>
-            <button onClick={goToStock} className='SideBar-Button'><img className='SideBar-Icon' src={stock_icon} /><span className='SideBar-Title'>מלאי</span>{alert &&<img className='alert-icon' src={alert_icon} />}</button>
+            <button onClick={goToStock} className='SideBar-Button'><img className='SideBar-Icon' src={stock_icon} /><span className='SideBar-Title'>מלאי</span>{alert &&<img className='alert-icon' src={alert_icon} title='מחסור במלאי !'/>}</button>
             <button onClick={goToCategories} className='SideBar-Button'><img className='SideBar-Icon' src={categories_icon} /><span className='SideBar-Title'>קטגוריות</span></button>
             <button onClick={goToSuppliers} className='SideBar-Button'><img className='SideBar-Icon' src={suppliers_icon} /><span className='SideBar-Title'>ספקים</span></button>
             <button onClick={goToCalendar} className='SideBar-Button'><img className='SideBar-Icon' src={calendar_icon} /><span className='SideBar-Title'>לוח תפריטים</span></button>

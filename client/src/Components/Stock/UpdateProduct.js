@@ -7,7 +7,7 @@ function UpdateProduct(props) {
     const [checked, setChecked] = useState(!productToUpdate.status)
    
     const [updateValues, setUpdateValues] = useState({
-        שם_מוצר: productToUpdate.שם_מוצר,
+        שם: productToUpdate.שם,
         קטגוריה: productToUpdate.קטגוריה,
         כשרות: productToUpdate.כשרות,
         ספק:  productToUpdate.ספק,
@@ -61,7 +61,7 @@ function UpdateProduct(props) {
                 <div className='UpdateProduct-Title'>עריכת מוצר</div>
                 <div className='UpdateProduct-InputBox'>
                     <label className='UpdateProduct-Label'>שם: </label>
-                    <input className='AddProductPage-Input' type="text" name='שם_מוצר' value={updateValues.שם_מוצר} onChange={updateData} required pattern=".*\S+.*" title="יש למלא השדה"/> 
+                    <input className='AddProductPage-Input' type="text" name='שם' value={updateValues.שם} onChange={updateData} required pattern=".*\S+.*" title="יש למלא השדה"/> 
                     <label className='AddProduct-Label'>קטגוריה: </label>
                     <select name='קטגוריה' value={updateValues.קטגוריה} onChange={updateData} required pattern=".*\S+.*" title="This field is required">
                         <option value=''>בחר קטגוריה</option>

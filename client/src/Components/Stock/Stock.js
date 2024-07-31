@@ -3,6 +3,7 @@ import './Stock.css'
 import AddProduct from './AddProduct.js';
 import UpdateProduct from './UpdateProduct.js';
 import { useAuth } from '../../Context/UserContext.jsx';
+import Table from '../Input/Table.jsx';
 
 function Stock() {
 
@@ -69,36 +70,15 @@ function Stock() {
                     <input type='text' className='StockPage-SearchBox-Input' placeholder='חיפוש מוצר לפי שם' value={search} onChange={updateSearch}></input>
                 </div>
                 {dataStock.length &&
+                    <>     
+                    <Table data={dataStock} values={["כמות_מינימלית", "יחידה", "כמות", "יצרן", "ספק", "כשרות", "קטגוריה", "שם"]} category={category} allCategories={"כל המוצרים"} search={search} updateFunction={updateProduct} />
+                                
                     <div>
-                        <div className='Stock-Headers'>
-                            <div className='Stock-Header'> כמות מינימלית </div>
-                            <div className='Stock-Header'> יחידה </div>
-                            <div className='Stock-Header'> כמות </div>
-                            <div className='Stock-Header'> יצרן </div>
-                            <div className='Stock-Header'> ספק </div>
-                            <div className='Stock-Header'> כשרות </div>
-                            <div className='Stock-Header'> קטגוריה </div>
-                            <div className='Stock-Header'> שם </div>
-                            <div className='Stock-Header'> Id </div>
-                        </div>
-                            {dataStock.map((item) => (
-                                ((category === 'כל המוצרים' || category === item.קטגוריה) && (item.שם_מוצר.includes(search)))&&
-                            <button key={item.id} className='Stock-ProductRow' onClick={() => updateProduct(item)} title='עריכת מוצר'>
-                                <div className='Stock-row-field'> {item.כמות_מינימלית} </div>
-                                <div className='Stock-row-field'> {item.יחידה} </div>
-                                {item.כמות<item.כמות_מינימלית &&<div className='Stock-row-field-Alert'> {item.כמות} </div>}
-                                {item.כמות>=item.כמות_מינימלית &&<div className='Stock-row-field'> {item.כמות} </div>}
-                                <div className='Stock-row-field'> {item.יצרן} </div>
-                                <div className='Stock-row-field'> {item.ספק} </div>
-                                <div className='Stock-row-field' id={item.כשרות}> {item.כשרות} </div>
-                                <div className='Stock-row-field'> {item.קטגוריה} </div>
-                                <div className='Stock-row-field'> {item.שם_מוצר} </div>
-                                <div className='Stock-row-field'> {item.id} </div>
-                            </button>))}
-
-                            {showAddProductDialog ? <AddProduct OpenClose={openAddProductDialog}/> : null}
-                            {showUpdateProductDialog ? <UpdateProduct OpenClose={openUpdateProductDialog} ProductToUpdate={productToUpdate}/> : null}   
-                    </div>}
+                        {showAddProductDialog ? <AddProduct OpenClose={openAddProductDialog}/> : null}
+                        {showUpdateProductDialog ? <UpdateProduct OpenClose={openUpdateProductDialog} ProductToUpdate={productToUpdate}/> : null}   
+                    </div>
+                    </>
+                    }
                 </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </div>
 

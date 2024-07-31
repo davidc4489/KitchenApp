@@ -16,7 +16,9 @@ export default function Table({data, values, category, allCategories, search, up
                     ((item.שם.includes(search)) || (item.כשרות?.includes(search)))) &&
             <tr style={{cursor: 'pointer'}} className="table-secondary" key={item.id} onClick={() => updateFunction(item)} title='עריכת מנה'>
                 {values.map((value) => (
-                <td id={item[value]}>{item[value]}</td>
+                <td id={item[value]} className={value === 'כמות' && item.כמות < item.כמות_מינימלית ? 'text-red' : ''}>
+                    {item[value]}
+                </td>
                 ))}
             </tr>   
             ))}
