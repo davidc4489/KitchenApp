@@ -101,7 +101,7 @@ function Categories() {
                             {showAddCategoryDialog ? <AddCategory OpenClose={openAddCategoryDialog}/> : null}
                             {showUpdateCategoryDialog ? <UpdateCategory OpenClose={openUpdateCategoryDialog} CategoryToUpdate={categoryToUpdate}/> : null}                 
                     </div>}
-                </div>:<div className='NoAccessAlert'>To access the data please login</div>}
+                </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </div>
     );
 }

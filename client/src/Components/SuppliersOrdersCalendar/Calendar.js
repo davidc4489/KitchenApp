@@ -193,7 +193,7 @@ function SuppliersOrdersCalendar() {
                     ))}
                     {showUpdateEventDialog ? <UpdateEvent OpenClose={openUpdateEventDialog} EventToUpdate={eventToUpdate}/> : null}  
                 </section>
-            </section>:<div className='NoAccessAlert'>To access the data please login</div>}
+            </section>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </div>
     );
     }

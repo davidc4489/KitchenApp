@@ -72,7 +72,7 @@ function Messages() {
                             ))}
                             {showMessageToDeleteDialog ? <DeleteMessage OpenClose={openMessageToDeleteDialog} MessageToDelete={messageToDelete}/> : null} 
                     </div>}
-                </div>:<div className='NoAccessAlert'>To access the data please login</div>}
+                </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </div>
     );
 }

@@ -80,7 +80,7 @@ function Users() {
                             {showAddUserDialog ? <AddUser OpenClose={openAddUserDialog}/> : null}
                             {showUpdateUserDialog ? <UpdateUser OpenClose={openUpdateUserDialog} UserToUpdate={userToUpdate}/> : null} 
                     </div>}
-                </div>:<div className='NoAccessUsersAlert'>To access the data please login with management permission</div>}
+                </div>:<div className='NoAccessUsersAlert'>נא להזדהות עבור גישה לנתונים עם הרשאת מנהל</div>}
         </div>
     );
 }

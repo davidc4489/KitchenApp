@@ -61,7 +61,7 @@ function Menus() {
                 {showAddMenuDialog ? <AddMenu OpenClose={openAddMenuDialog}/> : null}
                 {showUpdateMenuDialog ? <UpdateMenu OpenClose={openUpdateMenuDialog} MenuToUpdate={menuToUpdate}/> : null}                 
                     
-            </div>:<div className='NoAccessAlert'>To access the data please login</div>}
+            </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </>
     );
 }

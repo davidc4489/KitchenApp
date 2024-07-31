@@ -29,7 +29,7 @@ function Settings() {
                         <input className='AddProductPage-Input' type="number" name='כמות'  required/>
                         <label className='AddProduct-Label'>ימים לפני מועד ההזמנה </label>
                     </div>
-                </div>:<div className='NoAccessAlert'>To access the data please login</div>}
+                </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </div>
     );
 }
