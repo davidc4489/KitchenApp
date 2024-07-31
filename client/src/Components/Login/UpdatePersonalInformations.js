@@ -6,6 +6,7 @@ import { useUserUpdate } from '../../Context/UserToUpdateContext';
 
 function UpdatePersonalInformations(props) {
 
+    // Get user data from userUpdate context
     const {id, name, email, password, permission, userSetter} = useUserUpdate();
     const [nameToUpdate, setName] = useState(name);
     const [mailtoUpdate, setMail] = useState(email);
@@ -13,6 +14,7 @@ function UpdatePersonalInformations(props) {
     const permissionToUpdate = permission;
     const idToUpdate = id;
 
+    // Function to update the database
     function saveData() {
         const updateValues = {
             שם: nameToUpdate,
@@ -22,7 +24,9 @@ function UpdatePersonalInformations(props) {
             idUpdate: idToUpdate
         };
 
-        if(!validator.isEmail(updateValues.מייל)){alert('כתובת מייל לא תקינה !')}
+        if(!validator.isEmail(updateValues.מייל)){
+            alert('כתובת מייל לא תקינה !')
+        }
         else{
             userSetter(updateValues);
             fetch(`http://localhost:4000/api/users/${id}`, {
