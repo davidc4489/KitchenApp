@@ -99,7 +99,7 @@ function UpdateDish(props) {
                         </div>
                         {Array.from(dataDishIngredients).map((ingredient) => (
                             dataStock.map((product) => (
-                                product.id == ingredient.idIngredient
+                                product.id == ingredient.idIngredient && ingredient.כמות !== 0
                              &&
                             <div className='ingredientsList'>
                                 <div>{ingredient.יחידה}</div>

@@ -39,19 +39,37 @@ const getItem = async (collection, search_column, id) => {
     });
 };
 
-const add = (collection, data) => {
-    let keys = Object.keys(data)
-    let values = Object.values(data)
-    const query = `INSERT INTO ${collection} (${keys}) VALUES (${'?,'.repeat(keys.length).slice(0, -1)})`;
+// const add = (collection, data) => {
+//     let keys = Object.keys(data)
+//     let values = Object.values(data)
+//     const query = `INSERT INTO ${collection} (${keys}) VALUES (${'?,'.repeat(keys.length).slice(0, -1)})`;
 
-    db.run(query, values, (err) => {
-        if (err) {
-            console.error('Error adding data:', err);
-        } else {
-            console.log('Data added successfully');
-        }
+//     db.run(query, values, (err) => {
+//         if (err) {
+//             console.error('Error adding data:', err);
+//         } else {
+//             console.log('Data added successfully');
+//         }
+//         });
+//     };
+
+const add = (collection, data) => {
+    return new Promise((resolve, reject) => {
+        let keys = Object.keys(data);
+        let values = Object.values(data);
+        const query = `INSERT INTO ${collection} (${keys.join(', ')}) VALUES (${keys.map(() => '?').join(', ')})`;
+
+        db.run(query, values, function(err) {
+            if (err) {
+                console.error('Error adding data:', err);
+                reject(err); // Rejette la promesse en cas d'erreur
+            } else {
+                console.log('Data added successfully');
+                resolve(this.lastID); // Résout la promesse avec l'ID de la dernière insertion, si nécessaire
+            }
         });
-    };
+    });
+};
 
 const update = ( collection, data ) => {
     let keys = Object.keys(data)
