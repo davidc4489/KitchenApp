@@ -64,8 +64,38 @@ function UpdateDishIngredients(props) {
         }))
     }
 
+    function checkForTypeConflict() {
+        console.log("Update Values:", updateValues);
+        
+        // Récupère les IDs des ingrédients de updateValues et dataDishIngredients
+        const ingredientIdsUpdateValues = updateValues.ingredients.map(ingredient => parseInt(ingredient.id));
+        const ingredientIdsDishIngredients = dataDishIngredients.map(ingredient => parseInt(ingredient.idIngredient));
+    
+        // Combine les IDs des ingrédients pour vérifier tous les ingrédients utilisés
+        const allIngredientIds = new Set([...ingredientIdsUpdateValues, ...ingredientIdsDishIngredients]);
+    
+        // Filtre les produits dans dataStock pour ne garder que ceux qui sont dans allIngredientIds
+        const products = dataStock.filter(product => allIngredientIds.has(parseInt(product.id)));
+    
+        console.log("Products:", products);
+    
+        // Vérifie s'il y a des produits de type 'חלבי' et 'בשרי'
+        const hasLait = products.some(product => product.כשרות === 'חלבי');
+        const hasViande = products.some(product => product.כשרות === 'בשרי');
+    
+        if (hasLait && hasViande) {
+            console.log("Conflit de types");
+            return true;
+        }
+        return false;
+    }
+
     function saveData(event) {
         event.preventDefault()
+        if (checkForTypeConflict()) {
+            alert("מנה אינה יכולה רכיבים חלביים ובשריים ביחד")
+            return;
+        }
         if (updateValues.id) {
             fetch(`http://localhost:4000/api/dishes/${updateValues.id}`, {
                 method: 'PUT', // or 'PUT'
