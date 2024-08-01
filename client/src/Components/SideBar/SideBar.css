@@ -1,6 +1,7 @@
 .SideBar{
     background: rgb(43, 43, 44);
     /* height: 100%; */
+    width: 12vw;
     min-width: 12vw;
     /* min-height: 33vh; */
     color: white;
