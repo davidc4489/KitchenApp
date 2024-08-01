@@ -58,7 +58,7 @@ function Dishes() {
                 <Input type='text' className={"form-control w-25 p-1 mx-auto p-2"} placeholder='חיפוש מנה לפי שם או כשרות' value={search} onChange={setSearch}/>
                 
                 {dataDishes.length &&
-                    <Table data={dataDishes} values={["שם", "קטגוריה", "כשרות", "עלות"]} category={category} allCategories={"כל המנות"} search={search} updateFunction={updateDish} />
+                    <Table data={dataDishes} values={["שם", "קטגוריה", "כשרות", "עלות"]} category={category} allCategories={"כל המנות"} search={search} updateFunction={updateDish} title={"עריכת מנה"}/>
                 }
 
                 {showAddDishDialog ? <AddDish OpenClose={openAddDishDialog}/> : null}

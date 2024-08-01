@@ -71,7 +71,7 @@ function Stock() {
                 </div>
                 {dataStock.length &&
                     <>     
-                    <Table data={dataStock} values={["כמות_מינימלית", "יחידה", "כמות", "יצרן", "ספק", "כשרות", "קטגוריה", "שם"]} category={category} allCategories={"כל המוצרים"} search={search} updateFunction={updateProduct} />
+                    <Table data={dataStock} values={["כמות_מינימלית", "יחידה", "כמות", "יצרן", "ספק", "כשרות", "קטגוריה", "שם"]} category={category} allCategories={"כל המוצרים"} search={search} updateFunction={updateProduct} title={"עריכת מוצר"}/>
                                 
                     <div>
                         {showAddProductDialog ? <AddProduct OpenClose={openAddProductDialog}/> : null}

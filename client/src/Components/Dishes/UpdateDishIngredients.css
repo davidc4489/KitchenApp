@@ -33,6 +33,7 @@
 
 .UpdateDishPage-Input {
     direction: rtl;
+    border: 1px solid black;
 }
 
 .UpdateDish-Checkbox{

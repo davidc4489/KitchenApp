@@ -80,8 +80,8 @@ function AddProduct(props) {
                 
 
                     <div className='AddProduct-Buttons'>
-                        <button className='AddProduct-Button' onClick={props.OpenClose}>ביטול</button>
-                        <input type="submit" value={'שמירה'} className='AddProduct-Button' onClick={saveData}></input>
+                        <button className='AddProduct-Button AddProduct-CancelButton' onClick={props.OpenClose}>ביטול</button>
+                        <input type='submit' value={'שמירה'} className='AddProduct-Button AddProduct-SaveButton' onClick={saveData}></input>
                     </div>
             </form>
         </div>

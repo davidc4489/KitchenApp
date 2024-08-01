@@ -13,3 +13,34 @@ td:first-of-type{
 .text-red {
     color: red;
 }
+
+.table-container {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.thead th {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.table-row {
+    cursor: pointer;
+}
+
+.text-red {
+    color: red;
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        padding: 0 10px;
+    }
+}

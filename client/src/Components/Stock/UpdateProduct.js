@@ -60,7 +60,7 @@ function UpdateProduct(props) {
             <form className='UpdateProduct-Box-Content'>
                 <div className='UpdateProduct-Title'>עריכת מוצר</div>
                 <div className='UpdateProduct-InputBox'>
-                    <label className='UpdateProduct-Label'>שם: </label>
+                    <label className='AddProduct-Label'>שם: </label>
                     <input className='AddProductPage-Input' type="text" name='שם' value={updateValues.שם} onChange={updateData} required pattern=".*\S+.*" title="יש למלא השדה"/> 
                     <label className='AddProduct-Label'>קטגוריה: </label>
                     <select name='קטגוריה' value={updateValues.קטגוריה} onChange={updateData} required pattern=".*\S+.*" title="This field is required">
@@ -92,9 +92,9 @@ function UpdateProduct(props) {
                     <input className='AddProductPage-Input' type="number" name='כמות_מינימלית' value={updateValues.כמות_מינימלית} onChange={updateData} required/>
 
                     <div className='UpdateProduct-Buttons'>
-                        <button className='UpdateProduct-Button' onClick={props.OpenClose}>ביטול</button>
-                        <button className='UpdateProduct-Button' onClick={deleteProduct}>מחיקת מוצר</button>
-                        <input type='submit' value={'שמירה'} className='UpdateProduct-Button' onClick={saveData}></input>
+                        <button className='UpdateProduct-Button UpdateProduct-CancelButton' onClick={props.OpenClose}>ביטול</button>
+                        <input type='submit' value={'שמירה'} className='UpdateProduct-Button UpdateProduct-SaveButton' onClick={saveData}></input>
+                        <button className='UpdateProduct-Button UpdateProduct-DeleteButton' onClick={deleteProduct}>מחיקת מוצר</button>
                     </div>
                 </div>
             </form>
