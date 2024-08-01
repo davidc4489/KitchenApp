@@ -2,25 +2,29 @@ import {getAll, add, update, remove} from "./baseServer.js";
 import sqlite3 from 'sqlite3';
 let db = new sqlite3.Database('./database.db');
 
+// Recupere les donnees des menus
 export const getMenus = async (req, res) => {
     let menuData = [] 
     await getAll("menus").then(data => menuData = data)
      return res.send(menuData)
 }
 
+// Recupere les differentes categories de menus 
 export const getCategories = async (req, res) => {
     let categoriesData = [] 
     await getAll("menuCategories").then(data => categoriesData = data)
      return res.send(categoriesData)
 }
 
+// Recupere tous les plats d'un menu
 export const getDishes = async (req, res) => {
     let dishesData
     await getFewItems ('menuDishes', 'idMenu', req.params.id).then(data => dishesData = data)
     return res.send(dishesData)
   }
 
-export const getFewItems = async (collection, search_column, id) => {
+// Recupere plusieurs elements d'un tableau suivant les arguments recus en parametre
+  export const getFewItems = async (collection, search_column, id) => {
     return new Promise((resolve, reject) => {
         const query = `SELECT * FROM ${collection} WHERE ${search_column} = ?`;
         db.all(query, id, (err, row) => {
@@ -39,12 +43,13 @@ export const getFewItems = async (collection, search_column, id) => {
     });
 }
 
+// Ajoute un nouveau menu d'apres les donnees fournies par l'utilisateur
 export const addMenu = (req, res) => {
     let newData = {
         "שם": req.body.שם,
         "קטגוריה": req.body.קטגוריה,
-        "כשרות": req.body.כשרות ? req.body.כשרות : null,
-        "עלות": null
+        "כשרות": "פרווה",
+        "עלות": 0
     }
 
     if (req.body.שם && req.body.קטגוריה){
@@ -52,7 +57,9 @@ export const addMenu = (req, res) => {
     res.send({ message: 'Data added ' });
 }
 
-export const updateMenu = async(req,res) => {
+// Mise a jour d'un menu d'apres les donnees fournies par l'utilisateur
+export const updateMenu = async (req, res) => {
+    // Récupère les nouvelles données du menu fournies par l'utilisateur
     let newData = {id:req.params.id}
     if (req.body.שם){ newData.שם = req.body.שם}
     if (req.body.קטגוריה){ newData.קטגוריה = req.body.קטגוריה}
@@ -62,6 +69,7 @@ export const updateMenu = async(req,res) => {
     if (req.body.שם && req.body.קטגוריה){
         update('menus',newData)}
 
+    // Récupère les nouvelles données des plats du menu fournies par l'utilisateur
     let newDishesData = []
 
     console.log("req.body.dishes", req.body)
@@ -75,21 +83,20 @@ export const updateMenu = async(req,res) => {
             newDishesData.push(newDish)
         }
         
+        // Récupère les données des ingrédients des plats de la base de données
         let menuData = []
         await getAll("menuDishes").then(data => menuData = data)
         clearingMenuDishes("menuDishes")
         
         for(let i = 0; i < newDishesData.length; i++) {
             let currentMenu = []
-            currentMenu = menuData.filter(item => (item.idMenu == req.params.id && item.idDish == newDishesData[i].idDish))
-            // if(currentMenu.length !== 0){
-            // updateMenuDish('menuDishes',newDishesData[i])
-            // }
-            // else{
-            add('menuDishes',newDishesData[i])
-            // }
+            currentMenu = menuData.filter(item => (item.idMenu == parseInt(req.params.id) && item.idDish == newDishesData[i].idDish))
+            await add('menuDishes',newDishesData[i])
         }
-        }
+
+        // Mise à jour de la cacherout du menu après toutes les opérations d'ajout ou de mise à jour
+        updateKashrutMenu("menu", req.params.id);
+    }
     
     res.send({ message: 'Data for MENUS ${id} updated successfully' });
 }
@@ -98,6 +105,93 @@ const clearingMenuDishes = (collection) => {
     const clearingQuery = `DELETE FROM ${collection}`;
     db.run(clearingQuery);
 }
+
+const runKashrutQuery = (query, params, successMessage) => {
+    return new Promise((resolve, reject) => {
+        db.run(query, params, (err) => {
+            if (err) {
+                console.error('Error executing query:', err);
+                reject(err);
+            } else {
+                console.log(successMessage);
+                resolve();
+            }
+        });
+    });
+};
+
+const updateKashrutMenu = async (collection, idMenu) => {
+    try {
+        // Requête pour récupérer tous les plats du menu avec idMenu
+        const getDishesQuery = `SELECT * FROM menuDishes WHERE idMenu = ?`;
+        const dishes = await new Promise((resolve, reject) => {
+            db.all(getDishesQuery, [idMenu], (err, rows) => {
+                if (err) {
+                    console.error('Error fetching dishes:', err);
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+
+        // Vérifiez si le tableau de plats est vide et initialisation de la cacherout par defaut si c'est le cas
+        if (dishes.length === 0) {
+            await runKashrutQuery(
+                `UPDATE menus SET כשרות = ? WHERE id = ?`,
+                ["פרווה", idMenu],
+                `Kashrut Data for id ${idMenu} updated successfully`
+            );
+            console.log("Vide");
+            return;
+        }
+
+        // Vérifier chaque plat
+        for (let dish of dishes) {
+            // Requête pour récupérer le type du plat du tableau des plats
+            const getDishesQuery = `SELECT כשרות FROM dishes WHERE id = ?`;
+            const currentDish = await new Promise((resolve, reject) => {
+                db.get(getDishesQuery, [dish.idDish], (err, row) => {
+                    if (err) {
+                        console.error('Error fetching dish type:', err);
+                        reject(err);
+                    } else {
+                        resolve(row);
+                    }
+                });
+            });
+
+            // Vérifiez si le type de produit est "lait" ou "viande" et mise à jour du plat en conséquence
+            if (currentDish && currentDish.כשרות === 'חלבי') {
+                await runKashrutQuery(
+                    `UPDATE menus SET כשרות = ? WHERE id = ?`,
+                    ["חלבי", idMenu],
+                    `Kashrut Data for id ${idMenu} updated successfully`
+                );
+                console.log('Type lait trouvé');
+                return; // Arrête la boucle dès qu'un type lait est trouvé
+            } else if (currentDish && currentDish.כשרות === 'בשרי') {
+                await runKashrutQuery(
+                    `UPDATE menus SET כשרות = ? WHERE id = ?`,
+                    ["בשרי", idMenu],
+                    `Kashrut Data for id ${idMenu} updated successfully`
+                );
+                console.log('Type viande trouvé');
+                return; // Arrête la boucle dès qu'un type viande est trouvé
+            }
+        }
+
+        // Si aucun produit de type "lait" ou "viande" n'est trouvé
+        await runKashrutQuery(
+            `UPDATE menus SET כשרות = ? WHERE id = ?`,
+            ["פרווה", idMenu],
+            `Kashrut Data for id ${idMenu} updated successfully`
+        );
+        console.log('Aucun ingrédient de type lait ou viande trouvé.');
+    } catch (err) {
+        console.error('Error updating kashrut dish:', err);
+    }
+};
 
 const updateMenuDish = ( collection,data ) => {
     

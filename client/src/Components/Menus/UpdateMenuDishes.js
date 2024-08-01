@@ -27,18 +27,24 @@ function UpdateMenuDishes(props) {
     }, [])
 
     function addDish(event) {
-        event.preventDefault()
+        event.preventDefault();
 
         const newDish = {
             id: dishId
         };
 
-        const isDishAlreadyAdded = updateValues.dishes.some(dish => dish.id === newDish.id);
-        if(!isDishAlreadyAdded){
+        // Vérifier si le plat est déjà dans dataMenuDishes ou updateValues.dishes
+        const isDishInDataMenuDishes = dataMenuDishes.some(dish => dish.idDish === newDish.id);
+        const isDishInUpdateValues = updateValues.dishes.some(dish => dish.id === newDish.id);
+
+        if (!isDishInDataMenuDishes && !isDishInUpdateValues) {
             setUpdateValues(prevState => ({
                 ...prevState,
                 dishes: [...prevState.dishes, newDish]
-        }))}
+            }));
+        } else {
+            console.log("Le plat est déjà présent dans le menu ou en attente d'ajout.");
+        }
     }
 
     function removeDish(event, itemId) {
@@ -58,14 +64,26 @@ function UpdateMenuDishes(props) {
 
     function saveData(event) {
         event.preventDefault()
+        console.log("dataMenuDishes", dataMenuDishes)
+        console.log("updateValues.dishes", updateValues.dishes)
         const newDishes = dataMenuDishes
-            .filter(item => !updateValues.dishes.some(dish => dish.id === item.idDish))
+            .filter(item => !updateValues.dishes.some(dish => parseInt(dish.id) === parseInt(item.idDish)))
             .map(item => ({ id: parseInt(item.idDish) }));
 
-        let updatedFirstObject = {
-            ...updateValues,
-            dishes: [...updateValues.dishes, ...newDishes.map(dish => ({ id: dish.id.toString() }))]
-        };
+        let updatedFirstObject 
+        if(updateValues.dishes.length > 0){    
+            updatedFirstObject = {
+                ...updateValues,
+                dishes: [...updateValues.dishes, ...newDishes]
+            };
+        }
+        // Permet de ne pas ajouter un plat deja existant dans le menu
+        else {
+            updatedFirstObject = {
+                ...updateValues,
+                dishes: [...newDishes]
+            };
+        }
 
         if (updatedFirstObject.id) {
             fetch(`http://localhost:4000/api/menus/${updatedFirstObject.id}`, {
