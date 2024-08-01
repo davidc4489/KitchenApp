@@ -193,21 +193,21 @@ const updateKashrutMenu = async (collection, idMenu) => {
     }
 };
 
-const updateMenuDish = ( collection,data ) => {
+// const updateMenuDish = ( collection,data ) => {
     
-    let keys = Object.keys(data)
-    let values = Object.values(data)
+//     let keys = Object.keys(data)
+//     let values = Object.values(data)
 
-    const query = `UPDATE ${collection} SET ${(keys.slice(1).map(key => `${key} = ?,`).join(' ').slice(0,-1))} WHERE (idMenu = ? AND idDish = ?)`;
+//     const query = `UPDATE ${collection} SET ${(keys.slice(1).map(key => `${key} = ?,`).join(' ').slice(0,-1))} WHERE (idMenu = ? AND idDish = ?)`;
     
-    db.run(query, [...values.slice(1),data.idMenu, data.idDish], (err) => {
-        if (err) {
-            console.error('Error updating data:', err);
-        } else {
-            console.log(`Data for empid ${keys} updated successfully`);
-        }
-    });
-  };
+//     db.run(query, [...values.slice(1),data.idMenu, data.idDish], (err) => {
+//         if (err) {
+//             console.error('Error updating data:', err);
+//         } else {
+//             console.log(`Data for empid ${keys} updated successfully`);
+//         }
+//     });
+//   };
 
 export const removeMenu = (req, res) => {
     const id = req.body.id;

@@ -62,8 +62,38 @@ function UpdateMenuDishes(props) {
         setDataMenuDishes(filteredData)
     }
 
+    function checkForTypeConflict() {
+        console.log("Update Values:", updateValues);
+        
+        // Récupère les IDs des ingrédients de updateValues et dataDishIngredients
+        const dishesIdsUpdateValues = updateValues.dishes.map(dish => parseInt(dish.id));
+        const dishesIdsMenuDishes = dataMenuDishes.map(dish => parseInt(dish.idDish));
+    
+        // Combine les IDs des ingrédients pour vérifier tous les ingrédients utilisés
+        const allDishesIds = new Set([...dishesIdsUpdateValues, ...dishesIdsMenuDishes]);
+    
+        // Filtre les produits dans dataStock pour ne garder que ceux qui sont dans allIngredientIds
+        const dishes = dataDishes.filter(dish => allDishesIds.has(parseInt(dish.id)));
+    
+        console.log("Dishes:", dishes);
+    
+        // Vérifie s'il y a des produits de type 'חלבי' et 'בשרי'
+        const hasLait = dishes.some(dish => dish.כשרות === 'חלבי');
+        const hasViande = dishes.some(dish => dish.כשרות === 'בשרי');
+    
+        if (hasLait && hasViande) {
+            console.log("Conflit de types");
+            return true;
+        }
+        return false;
+    }
+
     function saveData(event) {
         event.preventDefault()
+                if (checkForTypeConflict()) {
+            alert("תפריט אינו יכול להכיל מנות חלביות ובשריות ביחד")
+            return;
+        }
         console.log("dataMenuDishes", dataMenuDishes)
         console.log("updateValues.dishes", updateValues.dishes)
         const newDishes = dataMenuDishes

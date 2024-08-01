@@ -93,7 +93,7 @@ function UpdateDishIngredients(props) {
     function saveData(event) {
         event.preventDefault()
         if (checkForTypeConflict()) {
-            alert("מנה אינה יכולה רכיבים חלביים ובשריים ביחד")
+            alert("מנה אינה יכולה להכיל רכיבים חלביים ובשריים ביחד")
             return;
         }
         if (updateValues.id) {
