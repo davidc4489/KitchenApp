@@ -1,6 +1,5 @@
 .UpdateSupplier-box {
     position: fixed;
-    /* z-index: 1; */
     left: 0;
     top: 0;
     width: 100%;
@@ -12,43 +11,96 @@
 
 .UpdateSupplier-Box-Content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 10px;
+    margin: 5% auto; /* Réduit la marge pour mieux centrer */
+    padding: 20px;
     border: 1px solid #888;
-    width: 22%;
+    width: 90%;
+    max-width: 500px; /* Limite la largeur maximale */
+    box-sizing: border-box; /* Inclut padding et bordure dans la largeur totale */
     display: grid;
+    gap: 10px; /* Espacement entre les éléments du formulaire */
 }
 
 .UpdateSupplier-Title{
     text-align: center;
     font-size: 22px;
-    padding: 5px;
+    margin-bottom: 20px;
 }
 
 .UpdateSupplier-InputBox{
-    display: grid;
+    display: flex;
+    flex-direction: column; /* Empile les éléments verticalement */
+    gap: 10px;
+    direction: rtl;
 }
 
-.UpdateSupplierPage-Input {
+/* .UpdateSupplierPage-Input {
     direction: rtl;
 }
 
 select {
     direction: rtl;
-}
+} */
 
 .UpdateSupplier-Label{
     text-align: center;
-    padding: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .UpdateSupplier-Buttons{
     display: flex;
     justify-content: space-between;
-    padding: 15px 0px;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .UpdateSupplier-Button{
-    margin: 5px;
-    width: max-content;
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #4CAF50; /* Couleur de fond des boutons */
+    color: white;
+    border-radius: 5px; /* Coins arrondis */
+}
+
+.UpdateSupplier-CancelButton {
+    background-color: grey;
+}
+
+.UpdateSupplier-CancelButton:hover {
+    background-color: darkgrey;
+}
+
+.UpdateSupplier-DeleteButton {
+    background-color: red;
+}
+
+.UpdateSupplier-DeleteButton:hover {
+    background-color: darkred;
+}
+
+.UpdateSupplier-SaveButton {
+    background-color: #4CAF50;
+}
+
+.UpdateSupplier-SaveButton:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+    .UpdateSupplier-Box-Content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+    }
+
+    .UpdateSupplier-Buttons {
+        flex-direction: column;
+    }
+
+    .UpdateSupplier-Button {
+        width: 100%;
+    }
 }

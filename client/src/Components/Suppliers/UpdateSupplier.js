@@ -88,9 +88,9 @@ function UpdateSupplier(props) {
                     <input className='UpdateSupplierPage-Input' type='number' name='זמן_אספקה_בימים' value={updateValues.זמן_אספקה_בימים} onChange={updateData}/>
 
                     <div className='UpdateSupplier-Buttons'>
-                        <button className='UpdateSupplier-Button' onClick={props.OpenClose}>ביטול</button>
-                        <button className='UpdateSupplier-Button' onClick={deleteSupplier}>מחיקת ספק</button>
-                        <input type='submit' value={'שמירה'} className='UpdateSupplier-Button' onClick={saveData}></input>
+                        <button className='UpdateSupplier-Button UpdateSupplier-CancelButton' onClick={props.OpenClose}>ביטול</button>
+                        <input type='submit' value={'שמירה'} className='UpdateSupplier-Button UpdateSupplier-SaveButton' onClick={saveData}></input>
+                        <button className='UpdateSupplier-Button UpdateSupplier-DeleteButton' onClick={deleteSupplier}>מחיקת ספק</button>
                     </div>
                 </div>
             </form>
