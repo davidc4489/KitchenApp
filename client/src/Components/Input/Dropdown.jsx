@@ -5,7 +5,7 @@ export default function Dropdown ({title, keyAll, allValue, setter, data}){
         <span className="caret"></span></button>
         <ul className="dropdown-menu">
             <li key={keyAll} className="dropdown-item" onClick={() => setter(allValue)}>
-                כל המנות 
+                {allValue}
             </li> 
             {data?.map((item) => (
                 <li key={item.id} className="dropdown-item" onClick={() => setter(item.שם)}>

@@ -1,17 +1,9 @@
-.Suppliers{
-    display: flex;
-    flex-direction: row-reverse;
-}
-
 .SuppliersPage-Buttons{
-    width: 90.9vw;
-    justify-content: space-around;
     display: flex;
-    background: grey;
+    place-content: space-between;
 }
 
 .SuppliersPage-Button{
-    width: 24vw;
     background: grey;
     border: none;
     cursor: pointer;
@@ -25,7 +17,6 @@
 }
 
 .SuppliersPage-AddSupplier-Button{
-    width: 20vw;
     background: rgb(43, 43, 44);
     border: none;
     cursor: pointer;
@@ -38,7 +29,7 @@
 
 .SuppliersPage-SearchBox{
     text-align: center;
-    direction: rtl;
+    padding: 10px;
 }
 
 .SuppliersPage-SearchBox-Input{
