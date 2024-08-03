@@ -4,6 +4,8 @@ import AddProduct from './AddProduct.js';
 import UpdateProduct from './UpdateProduct.js';
 import { useAuth } from '../../Context/UserContext.jsx';
 import Table from '../Input/Table.jsx';
+import Dropdown from '../Input/Dropdown.jsx';
+import Input from '../Input/Input.jsx';
 
 function Stock() {
 
@@ -53,34 +55,27 @@ function Stock() {
 
 
     return (
-        <div className='Stock'>
+        <>
             {access ?
             <div className='Stock-Page'>
                 <div className='StockPage-Buttons'>
+                    <Dropdown title={"בחר סוג מוצר"} keyAll={"allProducts"} allValue={"כל המוצרים"} setter={setCategory} data={dataCategories}/>
+                    <div className='Stock-TitlePage'>{category}</div>
                     <button className='StockPage-AddProduct-Button' onClick={() => setShowAddProductDialog(true)}>הוסף מוצר</button>
-                    {dataCategories?.map((item) => (
-                            <button key={item.id} className='StockPage-Button' onClick={() => setCategory(item.שם)}>
-                                {item.שם}
-                            </button> 
-                        ))}
-                    <button className='StockPage-Button' onClick={() => setCategory('כל המוצרים')}>כל המוצרים</button>
                 </div>
-                <div className='Stock-TitlePage'>{category}</div>
-                <div className='StockPage-SearchBox'>
-                    <input type='text' className='StockPage-SearchBox-Input' placeholder='חיפוש מוצר לפי שם' value={search} onChange={updateSearch}></input>
-                </div>
-                {dataStock.length &&
-                    <>     
-                    <Table data={dataStock} values={["כמות_מינימלית", "יחידה", "כמות", "יצרן", "ספק", "כשרות", "קטגוריה", "שם"]} category={category} allCategories={"כל המוצרים"} search={search} updateFunction={updateProduct} title={"עריכת מוצר"}/>
-                                
-                    <div>
-                        {showAddProductDialog ? <AddProduct OpenClose={openAddProductDialog}/> : null}
-                        {showUpdateProductDialog ? <UpdateProduct OpenClose={openUpdateProductDialog} ProductToUpdate={productToUpdate}/> : null}   
-                    </div>
-                    </>
-                    }
-                </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
-        </div>
+
+                <Input type='text' className={"form-control w-25 p-1 mx-auto p-2"} placeholder='חיפוש מוצר לפי שם' value={search} onChange={setSearch}/>
+
+                {dataStock.length &&  
+                    <Table data={dataStock} values={["שם","קטגוריה", "כשרות", "ספק", "יצרן", "כמות", "יחידה", "כמות_מינימלית"]} category={category} allCategories={"כל המוצרים"} search={search} updateFunction={updateProduct} title={"עריכת מוצר"}/>
+                }               
+        
+                {showAddProductDialog ? <AddProduct OpenClose={openAddProductDialog}/> : null}
+                {showUpdateProductDialog ? <UpdateProduct OpenClose={openUpdateProductDialog} ProductToUpdate={productToUpdate}/> : null}   
+
+            </div>:
+            <div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
+        </>
 
     );
 }

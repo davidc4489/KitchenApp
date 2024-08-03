@@ -1,35 +1,15 @@
-.Stock{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    direction: ltr;
-
-}
-
-.Stock-Page {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
 .StockPage-Buttons{
-    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    background: grey;
+    place-content: space-between;
 }
 
 .StockPage-Button{
-    flex: 1;
-    max-width: 200px; 
     background: grey;
     border: none;
     cursor: pointer;
     color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .StockPage-Button:hover{
@@ -37,7 +17,6 @@
 }
 
 .StockPage-AddProduct-Button{
-    width: 22vw;
     background: rgb(43, 43, 44);
     border: none;
     cursor: pointer;
@@ -48,8 +27,14 @@
     background: lightgrey;
 }
 
+.Stock-TitlePage{
+    text-align: center;
+    padding: 10px;
+}
+
 .StockPage-SearchBox{
     text-align: center;
+    direction: rtl;
 }
 
 .StockPage-SearchBox-Input{
@@ -57,9 +42,4 @@
     margin: 20px;
     padding: 1px;
     direction: rtl;
-}
-
-.Stock-TitlePage{
-    text-align: center;
-    padding: 10px;
 }

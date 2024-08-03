@@ -64,7 +64,8 @@ function Dishes() {
                 {showAddDishDialog ? <AddDish OpenClose={openAddDishDialog}/> : null}
                 {showUpdateDishDialog ? <UpdateDish OpenClose={openUpdateDishDialog} DishToUpdate={dishToUpdate}/> : null}  
 
-                </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
+            </div>:
+            <div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </>
     );
 }
