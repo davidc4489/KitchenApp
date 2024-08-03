@@ -39,6 +39,14 @@ td:first-of-type{
     color: red;
 }
 
+.even-row {
+    background-color: #f0f0f0; /* Light gray for even rows */
+}
+
+.odd-row {
+    background-color: #e0e0e0; /* Slightly darker gray for odd rows */
+}
+
 @media (max-width: 768px) {
     .table-container {
         padding: 0 10px;

@@ -1,21 +1,17 @@
-.AddCategory-box {
-    position: fixed;
-    /* z-index: 1; */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    text-align: right;
-}
-
 .AddCategory-Box-Content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    z-index: 3;
     border: 1px solid black;
-    width: 20%;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: 27%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 80vh;
+    overflow-y: auto; 
+    padding: 20px; 
 }
 
 .AddCategory-Title{
@@ -33,15 +29,17 @@
     padding: 5px;
 }
 
-.AddCategoryPage-Input {
-    direction: rtl;
-}
-
 .AddCategory-Buttons{
     display: flex;
     justify-content: space-between;
+    padding: 15px;
 }
 
-.AddCategory-Buttons{
-    padding: 15px;
+.AddCategory-Button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
 }

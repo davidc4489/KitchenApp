@@ -6,6 +6,7 @@ import { useAuth } from '../../Context/UserContext.jsx';
 import Input from '../../Tools/Input.jsx';
 import Table from '../../Tools/Table.jsx';
 import Dropdown from '../../Tools/Dropdown.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
 
 function Dishes() {
 
@@ -21,10 +22,12 @@ function Dishes() {
     const [showUpdateDishDialog, setShowUpdateDishDialog] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/dishes/categories`)
-        .then(response => response.json())
-        .then(data => setDataCategories(data.reverse()))
+        Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories)
     }, [dataCategories])
+
+    useEffect(() => {
+        Fetch(`http://localhost:4000/api/dishes`, setDataDishes)
+    }, [dataDishes])
 
     function openAddDishDialog (){
         setShowAddDishDialog(!showAddDishDialog)
@@ -38,12 +41,6 @@ function Dishes() {
         setShowUpdateDishDialog(true)
         setDishToUpdate(item)
     }
-
-    useEffect(() => {
-        fetch(`http://localhost:4000/api/dishes`)
-        .then(response => response.json())
-        .then(data => setDataDishes(data))
-    }, [dataDishes])
 
     return (
         <>

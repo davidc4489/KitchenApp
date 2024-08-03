@@ -1,3 +1,4 @@
+import React from 'react';
 import "./Table.css"
 
 export default function Table({data, values, category, allCategories, search, updateFunction, title}){
@@ -12,10 +13,16 @@ export default function Table({data, values, category, allCategories, search, up
                     </tr>
                 </thead>
                 <tbody className="table-group-divider">
-                    {data.map((item) => (
+                    {data.map((item, index) => (
                         ((category === allCategories || category === item.קטגוריה) &&
                             ((item.שם.includes(search)) || (item.כשרות?.includes(search)))) &&
-                    <tr style={{cursor: 'pointer'}} className="table-secondary" key={item.id} onClick={() => updateFunction(item)} title={title}>
+                    <tr 
+                        style={{cursor: 'pointer'}} 
+                        className={index % 2 === 0 ? 'even-row' : 'odd-row'} 
+                        key={item.id} 
+                        onClick={() => updateFunction(item)} 
+                        title={title}
+                    >
                         {values.map((value) => (
                         <td id={item[value]} className={value === 'כמות' && item.כמות < item.כמות_מינימלית ? 'text-red' : ''}>
                             {item[value]}

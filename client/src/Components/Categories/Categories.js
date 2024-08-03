@@ -3,6 +3,10 @@ import './Categories.css'
 import AddCategory from './AddCategory.js';
 import UpdateCategory from './UpdateCategory.js';
 import { useAuth } from '../../Context/UserContext.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
+import Dropdown from '../../Tools/Dropdown.jsx';
+import Input from '../../Tools/Input.jsx';
+import Table from '../../Tools/Table.jsx';
 
 function Categories() {
 
@@ -11,6 +15,9 @@ function Categories() {
     const [dataStockCategories, setDataStockCategories] = useState([])
     const [dataMenusCategories, setDataMenusCategories] = useState([])
     const [dataDishesCategories, setDataDishesCategories] = useState([])
+    const [allCategories, setAllCategories] = useState([]);
+    const mainCategories = [{id: 1, שם: "קטגוריות מוצרים"}, {id: 2, שם: "קטגוריות מנות"}, {id: 3, שם: "קטגוריות תפריטים"}]
+
     const [category, setCategory] = useState('כל הקטגוריות')
     const [categoryToUpdate, setCategoryToUpdate] = useState(null)
     const [search, setSearch] = useState('')
@@ -19,27 +26,32 @@ function Categories() {
     const [showUpdateCategoryDialog, setShowUpdateCategoryDialog] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/menus/categories`)
-        .then(response => response.json())
-        .then(data => setDataMenusCategories(data))
+        Fetch(`http://localhost:4000/api/menus/categories`, setDataMenusCategories)
     }, [dataMenusCategories])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock/categories`)
-        .then(response => response.json())
-        .then(data => setDataStockCategories(data))
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataStockCategories)
     }, [dataStockCategories])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/dishes/categories`)
-        .then(response => response.json())
-        .then(data => setDataDishesCategories(data))
+        Fetch(`http://localhost:4000/api/dishes/categories`, setDataDishesCategories)
     }, [dataDishesCategories])
 
+    useEffect(() => {
+        const combinedCategories = [
+            ...dataStockCategories.map(cat => ({ ...cat, id: `stock-${cat.id}`, originalId: cat.id })),
+            ...dataMenusCategories.map(cat => ({ ...cat, id: `menu-${cat.id}`, originalId: cat.id })),
+            ...dataDishesCategories.map(cat => ({ ...cat, id: `dish-${cat.id}`, originalId: cat.id }))
+        ];
 
-    function updateSearch(event){
-        setSearch(event.target.value)
-    }
+        // Using a Set to remove duplicates
+        const uniqueCategories = Array.from(new Set(combinedCategories.map(cat => cat.שם)))
+            .map(name => {
+                return combinedCategories.find(cat => cat.שם === name);
+            });
+
+        setAllCategories(uniqueCategories);
+    }, [dataStockCategories, dataMenusCategories, dataDishesCategories]);
 
     function openAddCategoryDialog (){
         setShowAddCategoryDialog(!showAddCategoryDialog)
@@ -55,54 +67,26 @@ function Categories() {
     }
 
     return (
-        <div className='Categories'>
+        <>
             {access ?
             <div className='Categories-Page'>
                 <div className='CategoriesPage-Buttons'>
-                    <button className='CategoriesPage-AddCategory-Button' onClick={() => setShowAddCategoryDialog(true)}>הוסף קטגוריה</button>
-                    <button className='CategoriesPage-Button' onClick={() => setCategory('קטגוריות מוצרים')}>קטגוריות מוצרים</button>
-                    <button className='CategoriesPage-Button' onClick={() => setCategory('קטגוריות מנות')}>קטגוריות מנות</button>
-                    <button className='CategoriesPage-Button' onClick={() => setCategory('קטגוריות תפריטים')}>קטגוריות תפריטים</button>
-                    <button className='CategoriesPage-Button' onClick={() => setCategory('כל הקטגוריות')}>כל הקטגוריות</button>
+                    <Dropdown title={"בחר סוג קטגוריה"} keyAll={"allCategories"} allValue={"כל הקטגוריות"} setter={setCategory} data={mainCategories}/>
+                    <div className='Categories-TitlePage'>{category}</div>
+                    <button className='btn btn-secondary' onClick={() => setShowAddCategoryDialog(true)}>הוסף קטגוריה</button>
                 </div>
-                <div className='Categories-TitlePage'>{category}</div>
 
-                <div className='CategoriesPage-SearchBox'>
-                    <input type='text' className='CategoriesPage-SearchBox-Input' placeholder='חיפוש קטגוריה לפי שם' value={search} onChange={updateSearch}></input>
-                </div>
-                {(dataStockCategories.length || dataDishesCategories.length || dataMenusCategories.length) &&
-                    <div>
-                        <div className='Categories-Headers'>
-                            <div className='Categories-Header'> קטגוריה </div>
-                            <div className='Categories-Header'> שם </div>
-                        </div>
-                            {dataStockCategories.map((item) => (
-                                ((category === 'כל הקטגוריות' || category == item.קטגוריה) && (item.שם.includes(search))) &&
-                            <button key={item.id} className='Categories-CategoryRow StockRow' onClick={() => updateCategory(item)}>
-                                    <div className='Category-row-field'> {item.קטגוריה} </div>
-                                    <div className='Category-row-field'> {item.שם} </div>
-                            </button>
-                            ))}
-                            {dataDishesCategories.map((item) => (
-                                ((category === 'כל הקטגוריות' || category == item.קטגוריה) && (item.שם.includes(search))) &&
-                            <button key={item.id} className='Categories-CategoryRow DishRow' onClick={() => updateCategory(item)}>
-                                    <div className='Category-row-field'> {item.קטגוריה} </div>
-                                    <div className='Category-row-field'> {item.שם} </div>
-                            </button>
-                            ))}
-                            {dataMenusCategories.map((item) => (
-                                ((category === 'כל הקטגוריות' || category == item.קטגוריה) && (item.שם.includes(search))) &&
-                            <button key={item.id} className='Categories-CategoryRow MenuRow' onClick={() => updateCategory(item)}>
-                                    <div className='Category-row-field'> {item.קטגוריה} </div>
-                                    <div className='Category-row-field'> {item.שם} </div>
-                            </button>
-                            ))}
+                <Input type='text' className={"form-control w-25 p-1 mx-auto p-2"} placeholder='חיפוש קטגוריה לפי שם' value={search} onChange={setSearch}/>
+                
+                {(dataStockCategories.length || dataDishesCategories.length || dataMenusCategories.length) &&  
+                    <Table data={allCategories} values={["שם","קטגוריה"]} category={category} allCategories={"כל הקטגוריות"} search={search} updateFunction={updateCategory} title={"עריכת קטגוריה"}/>
+                } 
 
-                            {showAddCategoryDialog ? <AddCategory OpenClose={openAddCategoryDialog}/> : null}
-                            {showUpdateCategoryDialog ? <UpdateCategory OpenClose={openUpdateCategoryDialog} CategoryToUpdate={categoryToUpdate}/> : null}                 
-                    </div>}
+                {showAddCategoryDialog ? <AddCategory OpenClose={openAddCategoryDialog}/> : null}
+                {showUpdateCategoryDialog ? <UpdateCategory OpenClose={openUpdateCategoryDialog} CategoryToUpdate={categoryToUpdate}/> : null}  
+                
                 </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
-        </div>
+        </>
     );
 }
 export default Categories

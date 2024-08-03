@@ -1,21 +1,17 @@
-.UpdateCategory-box {
-    position: fixed;
-    /* z-index: 1; */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    text-align: right;
-}
-
 .UpdateCategory-Box-Content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 10px;
-    border: 1px solid #888;
-    width: 20%;
+    z-index: 3;
+    border: 1px solid black;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: 27%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 80vh;
+    overflow-y: auto; 
+    padding: 20px; 
 }
 
 .UpdateCategory-Title{
@@ -33,22 +29,17 @@
     padding: 5px;
 }
 
-.UpdateCategoryPage-Input {
-    direction: rtl;
-}
-
-.UpdateCategory-Checkbox{
-    text-align: center;
-    padding: 5px;
-}
-
 .UpdateCategory-Buttons{
     display: flex;
     justify-content: space-between;
-    padding: 15px 0px;
+    padding: 15px;
 }
 
 .UpdateCategory-Button{
-    margin: 5px;
-    width: max-content;
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
 }

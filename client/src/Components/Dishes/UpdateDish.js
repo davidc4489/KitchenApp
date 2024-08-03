@@ -28,9 +28,7 @@ function UpdateDish(props) {
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/dishes/dishIngredients/${dishToUpdate.id}`)
-        .then(response => response.json())
-        .then(data => setDataDishIngredients(data))
+        Fetch(`http://localhost:4000/api/dishes/dishIngredients/${dishToUpdate.id}`, setDataDishIngredients)
     }, [dataDishIngredients])
 
     function openUpdateDishIngredientsDialog (){
@@ -39,7 +37,6 @@ function UpdateDish(props) {
 
     function updateDishIngredients(){
         setShowUpdateDishIngredientsDialog(true)
-        // setDishToUpdate(item)
     }
 
     function saveData() {

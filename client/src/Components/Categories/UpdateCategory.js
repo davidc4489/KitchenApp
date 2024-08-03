@@ -1,41 +1,45 @@
 import React, { useEffect, useState, } from 'react'
 import './UpdateCategory.css'
+import Input from '../../Tools/Input';
+import Select from '../../Tools/Select';
+import DeleteVerification from '../../Tools/DeleteVerification.jsx';
 
 function UpdateCategory(props) {
 
     const categoryToUpdate = props.CategoryToUpdate
-    const [formMode, setFormMode] = useState('edit');
-   
-    const [updateValues, setUpdateValues] = useState({
-        שם: categoryToUpdate.שם,
-        קטגוריה: categoryToUpdate.קטגוריה,
-        קטגוריה_קודמת: categoryToUpdate.קטגוריה
-    });
 
-    function updateData(event) {
-        setUpdateValues({
-            ...updateValues,
-            [event.target.name]: event.target.value,
-        })
-        setFormMode('edit')
-    }
+    const [name, setName] = useState(categoryToUpdate.שם);
+    const [category, setCategory] = useState(categoryToUpdate.קטגוריה);
+    const [previewCategory, setPreviewCategory] = useState(categoryToUpdate.קטגוריה);
+    const mainCategories = [{id: 1, שם: "קטגוריות מוצרים"}, {id: 2, שם: "קטגוריות מנות"}, {id: 3, שם: "קטגוריות תפריטים"}]
+
+    const [deleteCategoryBox, setDeleteCategoryBox] = useState(false)
 
     function saveData() {
-        setFormMode('edit')
-            fetch(`http://localhost:4000/api/categories/${categoryToUpdate.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updateValues),
-            })
-                .then(response => {response.json()})
+        const updateValues = {
+            שם: name,
+            קטגוריה: category,
+            קטגוריה_קודמת: previewCategory
+        };
+        fetch(`http://localhost:4000/api/categories/${categoryToUpdate.originalId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateValues),
+        })
+            .then(response => {response.json()
+    })}
+
+    function deleteCategoryDisplay(event) {
+        event.preventDefault();
+        setDeleteCategoryBox(true);
     }
 
     function deleteCategory() {
         props.OpenClose()
-        setFormMode('delete')
-        fetch(`http://localhost:4000/api/categories/${categoryToUpdate.id}`, {
+        console.log('categoryToUpdate', categoryToUpdate)
+        fetch(`http://localhost:4000/api/categories/${categoryToUpdate.originalId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,28 +50,23 @@ function UpdateCategory(props) {
 }
 
     return (
-        <div className='UpdateCategory-box'>
-            <form className='UpdateCategory-Box-Content'>
+        <>
+            <form className='UpdateCategory-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
                 <div className='UpdateCategory-Title'>עריכת קטגוריה</div>
                 <div className='UpdateCategory-InputBox'>
                     <label className='UpdateCategory-Label'>שם : </label>
-                    <input className='UpdateCategoryPage-Input' type="text" name='שם' value={updateValues.שם} onChange={updateData} required={formMode === 'edit'} pattern=".*\S+.*" title="This field is required"/> 
+                    <Input type="text" name='שם' value={name} onChange={setName}/> 
                     <label className='UpdateCategory-Label'>קטגוריה :</label>
-                    <select name='קטגוריה' value={updateValues.קטגוריה} onChange={updateData} required={formMode === 'edit'} pattern=".*\S+.*" title="This field is required">
-                        <option value=''>בחר קטגוריה</option>
-                             <option value='קטגוריות מוצרים'>קטגוריות מוצרים</option>
-                             <option value='קטגוריות מנות'>קטגוריות מנות</option>
-                             <option value='קטגוריות תפריטים'>קטגוריות תפריטים</option>
-                    </select> 
-                <div></div>
-                    <div className='UpdateCategory-Buttons'>
-                        <button className='UpdateCategory-Button' onClick={props.OpenClose}>ביטול</button>
-                        <button className='UpdateCategory-Button' onClick={deleteCategory}>מחיקת קטגוריה</button>
-                        <input type='submit' value={'שמירה'} className='UpdateCategory-Button' onClick={saveData}></input>
-                    </div>
+                    <Select id='category' value={category} onChange={setCategory} title='בחר קטגוריה' optionValue='' optionsToMap={mainCategories} valueToMap="שם"/>
+                </div>
+                <div className='UpdateCategory-Buttons'>
+                    <button className='AddDish-Button btn btn-outline-danger' onClick={deleteCategoryDisplay}>מחיקת קטגוריה</button>
+                    <input type='submit' value={'שמירה'} className='AddDish-Button btn btn-outline-primary' onClick={saveData}></input>
+                    <button className='AddDish-Button btn btn-outline-secondary' onClick={props.OpenClose}>ביטול</button>
                 </div>
             </form>
-        </div>
+            {deleteCategoryBox ? <DeleteVerification deleteFunction={deleteCategory} OpenClose={props.OpenClose} CloseBox={setDeleteCategoryBox} Text={"? למחוק את קטגוריה"}/> : null}
+        </>
     )
 }
 
