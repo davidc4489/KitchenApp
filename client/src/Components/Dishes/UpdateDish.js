@@ -1,10 +1,10 @@
 import React, { useEffect, useState, } from 'react'
 import './UpdateDish.css'
 import UpdateDishIngredients from './UpdateDishIngredients.js';
-import Input from '../Input/Input.jsx';
-import Select from '../Input/Select.jsx';
-import DeleteVerification from '../Input/DeleteVerification.jsx';
-import Fetch from '../Input/Fetch.jsx';
+import Input from '../../Tools/Input.jsx';
+import Select from '../../Tools/Select.jsx';
+import DeleteVerification from '../../Tools/DeleteVerification.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
 
 function UpdateDish(props) {
 

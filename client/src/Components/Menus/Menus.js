@@ -3,10 +3,10 @@ import './Menus.css'
 import AddMenu from './AddMenu.js';
 import UpdateMenu from './UpdateMenu.js';
 import { useAuth } from '../../Context/UserContext.jsx';
-import Input from '../Input/Input.jsx'
-import Table from '../Input/Table.jsx';
-import Dropdown from '../Input/Dropdown.jsx';
-import Fetch from '../Input/Fetch.jsx';
+import Input from '../../Tools/Input.jsx';
+import Table from '../../Tools/Table.jsx';
+import Dropdown from '../../Tools/Dropdown.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
 
 function Menus() {
 

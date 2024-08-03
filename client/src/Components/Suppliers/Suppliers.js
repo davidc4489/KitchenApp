@@ -3,8 +3,8 @@ import './Suppliers.css'
 import AddSupplier from './AddSupplier.js';
 import UpdateSupplier from './UpdateSupplier.js';
 import { useAuth } from '../../Context/UserContext.jsx';
-import Table from '../Input/Table.jsx';
-import Dropdown from '../Input/Dropdown.jsx';
+import Table from '../../Tools/Table.jsx';
+import Dropdown from '../../Tools/Dropdown.jsx';
 
 function Suppliers() {
 

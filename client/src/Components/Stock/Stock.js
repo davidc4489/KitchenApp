@@ -3,9 +3,9 @@ import './Stock.css'
 import AddProduct from './AddProduct.js';
 import UpdateProduct from './UpdateProduct.js';
 import { useAuth } from '../../Context/UserContext.jsx';
-import Table from '../Input/Table.jsx';
-import Dropdown from '../Input/Dropdown.jsx';
-import Input from '../Input/Input.jsx';
+import Table from '../../Tools/Table.jsx';
+import Dropdown from '../../Tools/Dropdown.jsx';
+import Input from '../../Tools/Input.jsx';
 
 function Stock() {
 

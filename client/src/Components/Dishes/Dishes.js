@@ -3,9 +3,9 @@ import './Dishes.css'
 import AddDish from './AddDish.js';
 import UpdateDish from './UpdateDish.js';
 import { useAuth } from '../../Context/UserContext.jsx';
-import Input from '../Input/Input.jsx';
-import Table from '../Input/Table.jsx';
-import Dropdown from '../Input/Dropdown.jsx';
+import Input from '../../Tools/Input.jsx';
+import Table from '../../Tools/Table.jsx';
+import Dropdown from '../../Tools/Dropdown.jsx';
 
 function Dishes() {
 

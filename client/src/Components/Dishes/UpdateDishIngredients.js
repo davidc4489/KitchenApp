@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './UpdateDishIngredients.css';
-import Select from '../Input/Select';
-import Fetch from '../Input/Fetch.jsx';
-import Input from '../Input/Input.jsx'
+import Select from '../../Tools/Select.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
+import Input from '../../Tools/Input.jsx'
 
 function UpdateDishIngredients(props) {
 

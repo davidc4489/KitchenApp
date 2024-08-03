@@ -1,7 +1,7 @@
 import React, { useState, } from 'react'
 import './UpdatePersonalInformations.css'
 import validator from "validator";
-import Input from '../Input/Input';
+import Input from '../../Tools/Input';
 import { useUserUpdate } from '../../Context/UserToUpdateContext';
 
 function UpdatePersonalInformations(props) {

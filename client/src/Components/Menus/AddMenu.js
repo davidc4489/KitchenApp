@@ -1,7 +1,7 @@
 import React, { useEffect, useState, } from 'react'
 import './AddMenu.css'
-import Input from '../Input/Input';
-import Select from '../Input/Select';
+import Input from '../../Tools/Input';
+import Select from '../../Tools/Select';
 
 function AddMenu(props) {
 

@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import UpdatePersonalInformations from './UpdatePersonalInformations.js';
 import { useAuth } from '../../Context/UserContext.jsx';
 import { useUserUpdate } from '../../Context/UserToUpdateContext';
-import Input from '../Input/Input.jsx';
-import Select from '../Input/Select.jsx';
+import Input from '../../Tools/Input.jsx';
+import Select from '../../Tools/Select.jsx';
 
 const Login = () => {
 

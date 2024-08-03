@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './UpdateMenuDishes.css';
-import Select from '../Input/Select';
+import Select from '../../Tools/Select';
 
 function UpdateMenuDishes(props) {
 
