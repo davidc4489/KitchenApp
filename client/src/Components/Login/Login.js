@@ -1,4 +1,4 @@
-import'./login.css'
+import'./Login.css'
 import React, { useState } from 'react'
 import UpdatePersonalInformations from './UpdatePersonalInformations.js';
 import { useAuth } from '../../Context/UserContext.jsx';
@@ -68,13 +68,13 @@ const Login = () => {
         :        
             // Case where user identified
             <>
-                    {(name !== null) &&
-                        <div className="alert alert-success" role="alert">
-                            שלום {name} !
-                        </div>
-                    }
-                    <button className='btn btn-outline-secondary' onClick={() => updatePersonalInformations()}>Change Email or Password</button>
-                    <button className='btn btn-outline-secondary me-3' onClick={logoutHandler}>Logout</button>
+                {(name !== null) &&
+                    <div className="alert alert-success" role="alert">
+                        שלום {name} !
+                    </div>
+                }
+                <button className='btn btn-outline-secondary' onClick={() => updatePersonalInformations()}>Change Email or Password</button>
+                <button className='btn btn-outline-secondary me-3' onClick={logoutHandler}>Logout</button>
             </>}
         </div>
         </>

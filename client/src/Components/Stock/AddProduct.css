@@ -1,53 +1,38 @@
-.AddProduct-box {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    text-align: center;
-}
-
 .AddProduct-Box-Content {
     background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
+    z-index: 3;
     border: 1px solid black;
-    width: 90%;
-    max-width: 500px;
-    box-sizing: border-box;
-    display: grid;
-    gap: 10px;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: 27%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 80vh;
+    overflow-y: auto; 
+    padding: 20px; 
 }
 
 .AddProduct-Title {
+    text-align: center;
     font-size: 22px;
-    margin-bottom: 20px;
+    padding: 5px;
 }
 
 .AddProduct-InputBox {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    direction: rtl;
-}
-
-.AddProductPage-Input {
-    direction: rtl;
+    display: grid;
 }
 
 .AddProduct-Label {
     text-align: center;
-    margin-bottom: 5px;
-    font-weight: bold;
+    padding: 5px;
 }
 
 .AddProduct-Buttons {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
-    margin-top: 20px;
+    padding: 15px;
 }
 
 .AddProduct-Button {
@@ -57,36 +42,4 @@
     cursor: pointer;
     border-radius: 5px;
     color: white;
-}
-
-.AddProduct-CancelButton {
-    background-color: grey;
-}
-
-.AddProduct-CancelButton:hover {
-    background-color: darkgrey;
-}
-
-.AddProduct-SaveButton {
-    background-color: #4CAF50;
-}
-
-.AddProduct-SaveButton:hover {
-    background-color: #45a049;
-}
-
-@media (max-width: 600px) {
-    .AddProduct-Box-Content {
-        width: 95%;
-        margin: 10% auto;
-        padding: 15px;
-    }
-
-    .AddProduct-Buttons {
-        flex-direction: column;
-    }
-
-    .AddProduct-Button {
-        width: 100%;
-    }
 }

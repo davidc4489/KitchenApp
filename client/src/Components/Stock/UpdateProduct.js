@@ -1,46 +1,57 @@
 import React, { useEffect, useState, } from 'react'
 import './UpdateProduct.css'
+import Fetch from '../../Tools/Fetch';
+import Input from '../../Tools/Input';
+import Select from '../../Tools/Select';
+import DeleteVerification from '../../Tools/DeleteVerification.jsx';
 
 function UpdateProduct(props) {
 
     const productToUpdate = props.ProductToUpdate
-    const [checked, setChecked] = useState(!productToUpdate.status)
-   
-    const [updateValues, setUpdateValues] = useState({
-        שם: productToUpdate.שם,
-        קטגוריה: productToUpdate.קטגוריה,
-        כשרות: productToUpdate.כשרות,
-        ספק:  productToUpdate.ספק,
-        יצרן: productToUpdate.יצרן,
-        כמות: productToUpdate.כמות,
-        יחידה: productToUpdate.יחידה,
-        כמות_מינימלית: productToUpdate.כמות_מינימלית
-    });
+
+    const [name, setName] = useState(productToUpdate.שם);
+    const [category, setCategory] = useState(productToUpdate.קטגוריה);
+    const [kashrut, setKashrut] = useState(productToUpdate.כשרות);
+    const [supplier, setSupplier] = useState(productToUpdate.ספק);
+    const [maker, setMaker] = useState(productToUpdate.יצרן);
+    const [quantity, setQuantity] = useState(productToUpdate.כמות);
+    const [unit, setUnit] = useState(productToUpdate.יחידה);
+    const [minimalQuantity, setMinimalQuantity] = useState(productToUpdate.כמות_מינימלית);
 
     const [dataCategories, setDataCategories] = useState([])
+    const kashrutCategories = [{שם: "בשרי"},{שם: "חלבי"},{שם: "פרווה"}]
+    const unitsCategories = [{שם: 'ק"ג'},{שם: "ליטר"},{שם: "יחידה"}]
+
+    const [deleteProductBox, setDeleteProductBox] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock/categories`)
-        .then(response => response.json())
-        .then(data => setDataCategories(data.reverse()))
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
     }, [dataCategories])
 
-    function updateData(event) {
-        setUpdateValues({
-            ...updateValues,
-            [event.target.name]: event.target.value,
-        })
-    }
-
     function saveData() {
-            fetch(`http://localhost:4000/api/stock/${productToUpdate.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updateValues),
-            })
-                .then(response => {response.json()})
+        const updateValues = {
+            שם: name,
+            קטגוריה: category,
+            כשרות: kashrut,
+            ספק: supplier,
+            יצרן: maker,
+            כמות: quantity,
+            יחידה: unit,
+            כמות_מינימלית: minimalQuantity
+        };
+        fetch(`http://localhost:4000/api/stock/${productToUpdate.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updateValues),
+        })
+            .then(response => {response.json()
+    })}
+
+    function deleteProductDisplay(event) {
+        event.preventDefault();
+        setDeleteProductBox(true);
     }
 
     function deleteProduct() {
@@ -56,49 +67,35 @@ function UpdateProduct(props) {
 }
 
     return (
-        <div className='UpdateProduct-box'>
-            <form className='UpdateProduct-Box-Content'>
-                <div className='UpdateProduct-Title'>עריכת מוצר</div>
-                <div className='UpdateProduct-InputBox'>
-                    <label className='AddProduct-Label'>שם: </label>
-                    <input className='AddProductPage-Input' type="text" name='שם' value={updateValues.שם} onChange={updateData} required pattern=".*\S+.*" title="יש למלא השדה"/> 
-                    <label className='AddProduct-Label'>קטגוריה: </label>
-                    <select name='קטגוריה' value={updateValues.קטגוריה} onChange={updateData} required pattern=".*\S+.*" title="This field is required">
-                        <option value=''>בחר קטגוריה</option>
-                        {dataCategories.map((category) => 
-                             <option value={category.שם}>{category.שם}</option>
-                        )}
-                    </select> 
-                    <label className='AddProduct-Label'>כשרות: </label>
-                    <select name='כשרות' value={updateValues.כשרות} onChange={updateData} required pattern=".*\S+.*" title="This field is required">
-                        <option value=''>בחר כשרות</option> 
-                        <option value='בשרי'>בשרי</option>                       
-                        <option value='חלבי'>חלבי</option>
-                        <option value='פרווה'>פרווה</option>                       
-                    </select>
-                    <label className='AddProduct-Label'>ספק: </label>
-                    <input className='AddProductPage-Input' type="text" name='ספק' value={updateValues.ספק} onChange={updateData} required/>
-                    <label className='AddProduct-Label'>יצרן: </label>
-                    <input className='AddProductPage-Input' type="text" name='יצרן' value={updateValues.יצרן} onChange={updateData} required/>
-                    <label className='AddProduct-Label'>כמות: </label>
-                    <input className='AddProductPage-Input' type="number" name='כמות' value={updateValues.כמות} onChange={updateData} required/>
-                    <label className='AddProduct-Label'>יחידה: </label>
-                    <select name='יחידה' value={updateValues.יחידה} onChange={updateData}>
-                        <option value='ק"ג'>ק"ג</option>                       
-                        <option value='ליטר'>ליטר</option>
-                        <option value='יחידה'>יחידה</option>                                           
-                     </select>
-                    <label className='AddProduct-Label'>כמות מינימלית: </label>
-                    <input className='AddProductPage-Input' type="number" name='כמות_מינימלית' value={updateValues.כמות_מינימלית} onChange={updateData} required/>
-
-                    <div className='UpdateProduct-Buttons'>
-                        <button className='UpdateProduct-Button UpdateProduct-CancelButton' onClick={props.OpenClose}>ביטול</button>
-                        <input type='submit' value={'שמירה'} className='UpdateProduct-Button UpdateProduct-SaveButton' onClick={saveData}></input>
-                        <button className='UpdateProduct-Button UpdateProduct-DeleteButton' onClick={deleteProduct}>מחיקת מוצר</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <>
+        <form className='UpdateProduct-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
+            <div className='UpdateProduct-Title'>עריכת מוצר</div>
+            <div className='UpdateProduct-InputBox'>
+                <label className='UpdateProduct-Label'>שם :</label>
+                <Input type="text" value={name} onChange={setName}/>
+                <label className='UpdateProduct-Label'>קטגוריה :</label>
+                <Select id='category' value={category} onChange={setCategory} title='בחר קטגוריה' optionValue='' optionsToMap={dataCategories} valueToMap="שם"/>
+                <label className='UpdateProduct-Label'>כשרות :</label>
+                <Select id='kashrut' value={kashrut} onChange={setKashrut} title='בחר כשרות' optionValue='' optionsToMap={kashrutCategories} valueToMap="שם"/>
+                <label className='UpdateProduct-Label'>ספק: </label>
+                <Input type="text" value={supplier} onChange={setSupplier}/>
+                <label className='UpdateProduct-Label'>יצרן: </label>
+                <Input type="text" value={maker} onChange={setMaker}/>
+                <label className='UpdateProduct-Label'>כמות: </label>
+                <Input type="number" value={quantity} onChange={setQuantity}/>
+                <label className='UpdateProduct-Label'>יחידה: </label>
+                <Select id='unit' value={unit} onChange={setUnit} title="בחר יחידה" optionValue='' optionsToMap={unitsCategories} valueToMap="שם"/>
+                <label className='UpdateProduct-Label'>כמות מינימלית: </label>
+                <Input type="number" value={minimalQuantity} onChange={setMinimalQuantity}/>
+            </div>
+            <div className='UpdateProduct-Buttons'>
+                <button className='AddDish-Button btn btn-outline-danger' onClick={deleteProductDisplay}>מחיקת מוצר</button>
+                <input type='submit' value={'שמירה'} className='AddDish-Button btn btn-outline-primary' onClick={saveData}></input>
+                <button className='AddDish-Button btn btn-outline-secondary' onClick={props.OpenClose}>ביטול</button>
+            </div>
+        </form>
+        {deleteProductBox ? <DeleteVerification deleteFunction={deleteProduct} OpenClose={props.OpenClose} CloseBox={setDeleteProductBox} Text={"? למחוק את המוצר"}/> : null}
+        </>
     )
 }
 

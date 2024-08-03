@@ -16,31 +16,8 @@
     background: lightgrey;
 }
 
-.StockPage-AddProduct-Button{
-    background: rgb(43, 43, 44);
-    border: none;
-    cursor: pointer;
-    color: white;
-}
-
-.StockPage-AddProduct-Button:hover{
-    background: lightgrey;
-}
-
 .Stock-TitlePage{
     text-align: center;
     padding: 10px;
     font-weight: bold;
-}
-
-.StockPage-SearchBox{
-    text-align: center;
-    direction: rtl;
-}
-
-.StockPage-SearchBox-Input{
-    width: 20vw;
-    margin: 20px;
-    padding: 1px;
-    direction: rtl;
 }

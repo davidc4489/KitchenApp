@@ -6,6 +6,7 @@ import { useAuth } from '../../Context/UserContext.jsx';
 import Table from '../../Tools/Table.jsx';
 import Dropdown from '../../Tools/Dropdown.jsx';
 import Input from '../../Tools/Input.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
 
 function Stock() {
 
@@ -33,26 +34,13 @@ function Stock() {
         setProductToUpdate(item)
     }
 
-    function updateSearch(event){
-        setSearch(event.target.value)
-    }
-
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock`)
-        .then(response => response.json())
-        .then(data => setDataStock(data))
+        Fetch(`http://localhost:4000/api/stock`, setDataStock)
     }, [dataStock])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/menusCalendar/updateStock`)
-    }, [])
-
-    useEffect(() => {
-        fetch(`http://localhost:4000/api/stock/categories`)
-        .then(response => response.json())
-        .then(data => setDataCategories(data))
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
     }, [dataCategories])
-
 
     return (
         <>
@@ -61,7 +49,7 @@ function Stock() {
                 <div className='StockPage-Buttons'>
                     <Dropdown title={"בחר סוג מוצר"} keyAll={"allProducts"} allValue={"כל המוצרים"} setter={setCategory} data={dataCategories}/>
                     <div className='Stock-TitlePage'>{category}</div>
-                    <button className='StockPage-AddProduct-Button' onClick={() => setShowAddProductDialog(true)}>הוסף מוצר</button>
+                    <button className="btn btn-secondary" onClick={() => setShowAddProductDialog(true)}>הוסף מוצר</button>
                 </div>
 
                 <Input type='text' className={"form-control w-25 p-1 mx-auto p-2"} placeholder='חיפוש מוצר לפי שם' value={search} onChange={setSearch}/>
@@ -76,7 +64,6 @@ function Stock() {
             </div>:
             <div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </>
-
     );
 }
 export default Stock

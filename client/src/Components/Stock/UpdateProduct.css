@@ -1,50 +1,38 @@
-.UpdateProduct-box {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    text-align: right;
-}
-
 .UpdateProduct-Box-Content {
     background-color: #fefefe;
-    margin: 5% auto; /* Réduit la marge pour mieux centrer */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 90%;
-    max-width: 500px; /* Limite la largeur maximale */
-    box-sizing: border-box; /* Inclut padding et bordure dans la largeur totale */
-    display: grid;
-    gap: 10px; /* Espacement entre les éléments du formulaire */
+    z-index: 3;
+    border: 1px solid black;
+    border-radius: 25px;
+    min-height: fit-content;
+    min-width: 27%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 80vh;
+    overflow-y: auto; 
+    padding: 20px; 
 }
 
 .UpdateProduct-Title{
     text-align: center;
     font-size: 22px;
-    margin-bottom: 20px;
+    padding: 5px;
 }
 
 .UpdateProduct-InputBox{
-    display: flex;
-    flex-direction: column; /* Empile les éléments verticalement */
-    gap: 10px;
-    direction: rtl;
+    display: grid;
 }
 
 .UpdateProduct-Label{
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: bold;
+    text-align: center;
+    padding: 5px;
 }
 
 .UpdateProduct-Buttons{
     display: flex;
     justify-content: space-between;
-    gap: 10px;
-    margin-top: 20px;
+    padding: 15px;
 }
 
 .UpdateProduct-Button {
@@ -52,12 +40,11 @@
     padding: 10px;
     border: none;
     cursor: pointer;
-    background-color: #4CAF50; /* Couleur de fond des boutons */
+    border-radius: 5px;
     color: white;
-    border-radius: 5px; /* Coins arrondis */
 }
 
-.UpdateProduct-CancelButton {
+/* .UpdateProduct-CancelButton {
     background-color: grey;
 }
 
@@ -95,4 +82,4 @@
     .UpdateProduct-Button {
         width: 100%;
     }
-}
+} */

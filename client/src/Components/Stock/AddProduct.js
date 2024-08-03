@@ -1,90 +1,75 @@
 import React, { useEffect, useState, } from 'react'
 import './AddProduct.css'
+import Fetch from '../../Tools/Fetch';
+import Input from '../../Tools/Input';
+import Select from '../../Tools/Select';
 
 function AddProduct(props) {
    
-    const [addValues, setAddValues] = useState({
-        שם: '',
-        קטגוריה: '',
-        ספק: '',
-        יצרן: '',
-        כמות: '',
-        יחידה: '',
-        כמות_מינימלית: ''
-    });
+    const [name, setName] = useState("");
+    const [category, setCategory] = useState("");
+    const [kashrut, setKashrut] = useState("");
+    const [supplier, setSupplier] = useState("");
+    const [maker, setMaker] = useState("");
+    const [quantity, setQuantity] = useState("");
+    const [unit, setUnit] = useState("");
+    const [minimalQuantity, setMinimalQuantity] = useState("");
 
     const [dataCategories, setDataCategories] = useState([])
+    const kashrutCategories = [{שם: "בשרי"},{שם: "חלבי"},{שם: "פרווה"}]
+    const unitsCategories = [{שם: 'ק"ג'},{שם: "ליטר"},{שם: "יחידה"}]
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock/categories`)
-        .then(response => response.json())
-        .then(data => setDataCategories(data.reverse()))
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
     }, [dataCategories])
 
-    function updateData(event) {
-        setAddValues({
-            ...addValues,
-            [event.target.name]: event.target.value
-        })
-    }
-
     function saveData() {
-            fetch('http://localhost:4000/api/stock/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(addValues),
-            })
-                .then(response => {response.json()
+        const addedValues = {
+            שם: name,
+            קטגוריה: category,
+            כשרות: kashrut,
+            ספק: supplier,
+            יצרן: maker,
+            כמות: quantity,
+            יחידה: unit,
+            כמות_מינימלית: minimalQuantity
+        };
+        fetch('http://localhost:4000/api/stock/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(addedValues),
+        })
+            .then(response => {response.json()
     })}
 
     return (
-        <div className='AddProduct-box'>
-            <form className='AddProduct-Box-Content'>
-                <div className='AddProduct-Title'>הוסף מוצר</div>
-                <div className='AddProduct-InputBox'>
-                    <label className='AddProduct-Label'>שם: </label>
-                    <input className='AddProductPage-Input' type="text" name='שם' value={addValues.שם} onChange={updateData} required /> 
-                    </div>
-                    <label className='AddProduct-Label'>קטגוריה: </label>
-                    <select name='קטגוריה' value={addValues.קטגוריה} onChange={updateData} required pattern=".*\S+.*" title="This field is required">
-                        <option value=''>בחר קטגוריה</option>
-                        {dataCategories.map((category) => 
-                             <option value={category.שם}>{category.שם}</option>
-                        )}
-                    </select> 
-                    <label className='AddProduct-Label'>כשרות: </label>
-                    <select name='כשרות' value={addValues.כשרות} onChange={updateData}>
-                        <option value=''>בחר כשרות</option> 
-                        <option value='בשרי'>בשרי</option>                       
-                        <option value='חלבי'>חלבי</option>
-                        <option value='פרווה'>פרווה</option>                       
-                    </select>
-                     <label className='AddProduct-Label'>ספק: </label>
-                    <input className='AddProductPage-Input' type="text" name='ספק' value={addValues.ספק} onChange={updateData} required/>
-                    <label className='AddProduct-Label'>יצרן: </label>
-                    <input className='AddProductPage-Input' type="text" name='יצרן' value={addValues.יצרן} onChange={updateData} required/>
-                    <label className='AddProduct-Label'>כמות: </label>
-                    <input className='AddProductPage-Input' type="number" name='כמות' value={addValues.כמות} onChange={updateData} required/>
-                    <label className='AddProduct-Label'>יחידה: </label>
-                    <select name='יחידה' value={addValues.יחידה} onChange={updateData} required pattern=".*\S+.*" title="יש למלא השדה">
-                        <option value=''>בחר יחידה</option> 
-                        <option value='ק"ג'>ק"ג</option>                       
-                        <option value='ליטר'>ליטר</option>
-                        <option value='יחידה'>יחידה</option>                                           
-                     </select>
-                    
-                    <label className='AddProduct-Label'>כמות מינימלית: </label>
-                    <input className='AddProductPage-Input' type="number" name='כמות_מינימלית' value={addValues.כמות_מינימלית} onChange={updateData} required/>
-                
-
-                    <div className='AddProduct-Buttons'>
-                        <button className='AddProduct-Button AddProduct-CancelButton' onClick={props.OpenClose}>ביטול</button>
-                        <input type='submit' value={'שמירה'} className='AddProduct-Button AddProduct-SaveButton' onClick={saveData}></input>
-                    </div>
-            </form>
-        </div>
+        <form className='AddProduct-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
+            <div className='AddProduct-Title'>הוסף מוצר</div>
+            <div className='AddProduct-InputBox'>
+                <label className='AddProduct-Label'>שם :</label>
+                <Input type="text" value={name} onChange={setName}/>
+                <label className='AddProduct-Label'>קטגוריה :</label>
+                <Select id='category' value={category} onChange={setCategory} title='בחר קטגוריה' optionValue='' optionsToMap={dataCategories} valueToMap="שם"/>
+                <label className='AddProduct-Label'>כשרות :</label>
+                <Select id='kashrut' value={kashrut} onChange={setKashrut} title='בחר כשרות' optionValue='' optionsToMap={kashrutCategories} valueToMap="שם"/>
+                <label className='AddProduct-Label'>ספק: </label>
+                <Input type="text" value={supplier} onChange={setSupplier}/>
+                <label className='AddProduct-Label'>יצרן: </label>
+                <Input type="text" value={maker} onChange={setMaker}/>
+                <label className='AddProduct-Label'>כמות: </label>
+                <Input type="number" value={quantity} onChange={setQuantity}/>
+                <label className='AddProduct-Label'>יחידה: </label>
+                <Select id='unit' value={unit} onChange={setUnit} title="בחר יחידה" optionValue='' optionsToMap={unitsCategories} valueToMap="שם"/>
+                <label className='AddProduct-Label'>כמות מינימלית: </label>
+                <Input type="number" value={minimalQuantity} onChange={setMinimalQuantity}/>
+            </div>
+            <div className='AddProduct-Buttons'>
+                <button className='AddDish-Button btn btn-outline-danger' onClick={props.OpenClose}>ביטול</button>
+                <input type='submit' value={'שמירה'} className='AddDish-Button btn btn-outline-primary' onClick={saveData}></input>
+            </div>
+        </form>
     )
 }
 

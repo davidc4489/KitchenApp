@@ -10,12 +10,6 @@ function AddDish(props) {
     const [category, setCategory] = useState("");
     const [dataCategories, setDataCategories] = useState([])
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:4000/api/dishes/categories`)
-    //     .then(response => response.json())
-    //     .then(data => setDataCategories(data))
-    // }, [dataCategories])
-
     useEffect(() => {
         Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories)
     }, [dataCategories])
