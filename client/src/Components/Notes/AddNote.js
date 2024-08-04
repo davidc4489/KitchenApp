@@ -29,20 +29,51 @@ function AddNote(props) {
     })}
 
     return (
-        <div className='AddNote-box'>
-            <form className='AddNote-Box-Content'>
-                {/* <div className='AddMenu-Title'>הוספת הערה</div> */}
-                <div className='AddNote-InputBox'>
-                    {/* <label className='AddMenu-Label'>שם :</label> */}
-                    <input className='AddMenuPage-Input AddNotePage-Input' type="text" name='כותרת' value={addValues.כותרת} onChange={updateData} placeholder='כותרת' required />
-                    {/* <label className='AddMenu-Label'>קטגוריה :</label> */}
-                    <textarea name='תוכן' value={addValues.תוכן} className='AddNotePage-TextArea' onChange={updateData} placeholder='כתוב הערה חדשה'></textarea>
-                </div>
-                    <div className='AddNote-Buttons'>
-                        <button className='AddNote-Button' onClick={props.OpenClose}>ביטול</button>
-                        <input type="submit" value={'שמירה'} className='AddNote-Button' onClick={saveData}></input>
+        <div className='modal show d-block' role='dialog' style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+            <div className='modal-dialog modal-dialog-centered' role='document'>
+                <div className='modal-content'>
+                    <div className='modal-header'>
+                        <h5 className='modal-title'>הוספת הערה חדשה</h5>
+                        <button type='button' className='close' onClick={props.OpenClose}>
+                            <span>&times;</span>
+                        </button>
                     </div>
-            </form>
+                    <form onSubmit={saveData}>
+                        <div className='modal-body'>
+                            <div className='form-group'>
+                                <label htmlFor='title'>כותרת</label>
+                                <input
+                                    type='text'
+                                    className='form-control'
+                                    id='title'
+                                    name='כותרת'
+                                    value={addValues.כותרת}
+                                    onChange={updateData}
+                                    placeholder='כותרת'
+                                    required
+                                />
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='content'>תוכן</label>
+                                <textarea
+                                    className='form-control'
+                                    id='content'
+                                    name='תוכן'
+                                    value={addValues.תוכן}
+                                    onChange={updateData}
+                                    placeholder='כתוב הערה חדשה'
+                                    rows='5'
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div className='modal-footer'>
+                            <button type='button' className='btn btn-secondary' onClick={props.OpenClose}>ביטול</button>
+                            <button type='submit' className='btn btn-primary'>שמירה</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

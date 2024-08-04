@@ -1,4 +1,4 @@
-import {getAll, add, update, remove} from "./baseServer.js";
+import {getAll, add, update, updateMenu, remove} from "./baseServer.js";
 import {getFewItems} from "./menus.js";
 
 export const getMenusCalendar = async (req, res) => {
@@ -30,7 +30,7 @@ export const addEvent = async (req, res) => {
     if (existingEvent) {
         // Si un tel élément existe, mettre à jour le amount
         existingEvent.amount = newData.amount;
-        update('menusCalendar', newData); // Assurez-vous que la fonction update existe et fonctionne comme prévu
+        updateMenu('menusCalendar', newData); // Assurez-vous que la fonction update existe et fonctionne comme prévu
         res.send({ message: 'Data existing updated', data: existingEvent });
     } else {
         // Sinon, ajouter un nouvel élément

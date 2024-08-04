@@ -1,5 +1,5 @@
 .Notes-NewNote-Button-Container {
-    width: 88w;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -15,9 +15,9 @@
     border-radius: 10px;
 }
 
-.Notes-NewNote-Button:hover{
+.Notes-NewNote-Button:hover {
     border: 1px solid grey;
-    cursor:text;
+    cursor: pointer;
 }
 
 .Notes-Container {
@@ -26,7 +26,7 @@
     direction: rtl;
 }
 
-.Note-Case{
+.Note-Case {
     border: 1px solid lightgrey;
     padding: 1%;
     margin: 1%;
@@ -34,11 +34,12 @@
     flex-basis: min-content;
     align-self: self-start;
     background-color: white;
+    height: 20vh;
 }
 
-.Note-Case:hover{
+.Note-Case:hover {
     border: 1px solid grey;
-    cursor:text;
+    cursor: pointer;
 }
 
 .Note-Title {
@@ -50,4 +51,8 @@
 
 .Note-Content {
     text-align: start;
+}
+
+.card {
+    cursor: pointer;
 }
