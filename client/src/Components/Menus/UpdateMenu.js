@@ -79,21 +79,20 @@ function UpdateMenu(props) {
     const handleClick = (event) => {
         event.preventDefault()
         updateMenuDishes()
-    };
+    }
 
     return (
         <>
-            <form className='UpdateMenu-Box-Content'>
+            <form className='UpdateMenu-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
                 <div className='UpdateMenu-Title'>עריכת תפריט</div>
                 <div className='UpdateMenu-InputBox'>
                     <label className='UpdateMenu-Label'>שם : </label>
                     <Input type="text" value={name} onChange={(setName)} required={formMode === 'edit'}/>
                     <label className='UpdateMenu-Label'>קטגוריה :</label>
                     <Select id='category' value={category} onChange={setCategory} title='בחר קטגוריה' optionValue='בחר קטגוריה' optionsToMap={dataCategories} valueToMap="שם"/>
-                <div className='ingredients-title'>: מנות</div>
+                    <div className='ingredients-title'>: מנות</div>
                     <div className='add-ingredient-input'>
                         <div className='ingredient-labels'>
-                            <label className='ingredientName-label'>שם</label>
                         </div>
                         {Array.from(dataMenuDishes).map((dish) => (
                             dataDishes.map((product) => (
@@ -105,9 +104,7 @@ function UpdateMenu(props) {
                             </div>
                         ))))}
                     </div>
-                    {/* <div className='UpdateDish-Buttons'> */}
                         <button className='UpdateDish-Button btn btn-outline-primary w-50' onClick={handleClick}>עריכת מנות</button>
-                    {/* </div> */}
                     <div className='UpdateMenu-Buttons'>
                         <button className='UpdateMenu-Button btn btn-outline-danger' onClick={props.OpenClose}>ביטול</button>
                         <button className='UpdateMenu-Button btn btn-danger' onClick={deleteMenuDisplay}>מחיקת תפריט</button>

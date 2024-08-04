@@ -74,13 +74,13 @@ const add = (collection, data) => {
 const update = ( collection, data ) => {
     let keys = Object.keys(data)
     let values = Object.values(data)
-    const query = `UPDATE ${collection} SET ${(keys.slice(1).map(key => `${key} = ?,`).join(' ').slice(0,-1))} WHERE id = ?`;
+    const query = `UPDATE ${collection} SET ${(keys.slice(1).map(key => `${key} = ?,`).join(' ').slice(0,-1))} WHERE idMenu = ?`;
     
-    db.run(query, [...values.slice(1),data.id], (err) => {
+    db.run(query, [...values.slice(1),data.idMenu], (err) => {
         if (err) {
             console.error('Error updating data:', err);
         } else {
-            console.log(`Data for empid ${keys} updated successfully`);
+            console.log(`Hello Data for empid ${keys} updated successfully`);
         }
     });
 };

@@ -111,6 +111,7 @@ CREATE TABLE IF NOT EXISTS menusCalendar (
         used boolean DEFAULT false
         );
 
+DROP TABLE menusCalendar
 
 -- CREATE TABLE IF NOT EXISTS menusForDay (
 --         id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -7,18 +7,40 @@ export const getMenusCalendar = async (req, res) => {
      return res.send(menusCalendarData)
 }
 
-export const addEvent = (req, res) => {
+export const addEvent = async (req, res) => {
     let newData = {
         "day": req.body.day,
         "month": req.body.month,
         "year": req.body.year,
-        "idMenu": req.body.menuId,
+        "idMenu": req.body.idMenu,
         "amount": req.body.amount
     }
 
-    console.log(newData)
-    add('menusCalendar', newData);
-    res.send({ message: 'Data added ' });
+    let menusCalendarData = [];
+    await getAll("menusCalendar").then(data => menusCalendarData = data);
+
+    // Vérifier si un élément similaire existe
+    let existingEvent = menusCalendarData.find(event => 
+        event.day == newData.day &&
+        event.month == newData.month &&
+        event.year == newData.year &&
+        event.idMenu == newData.idMenu
+    );
+
+    if (existingEvent) {
+        // Si un tel élément existe, mettre à jour le amount
+        existingEvent.amount = newData.amount;
+        update('menusCalendar', newData); // Assurez-vous que la fonction update existe et fonctionne comme prévu
+        res.send({ message: 'Data existing updated', data: existingEvent });
+    } else {
+        // Sinon, ajouter un nouvel élément
+        await add('menusCalendar', newData);
+        res.send({ message: 'Data added', data: newData });
+    }
+
+    // console.log(newData)
+    // add('menusCalendar', newData);
+    // res.send({ message: 'Data added ' });
 }
 
 export const updateStock = async (req, res) => {

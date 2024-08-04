@@ -105,9 +105,7 @@ function UpdateDish(props) {
                             </div>
                         ))))}
                     </div>
-                    {/* <div className='UpdateDish-Buttons'> */}
-                        <button className='UpdateDish-Ingredients-Buttons btn btn-outline-primary w-50' onClick={handleClick}>עריכת רכיבים</button>
-                    {/* </div> */}
+                    <button className='UpdateDish-Ingredients-Buttons btn btn-outline-primary w-50' onClick={handleClick}>עריכת רכיבים</button>
                     <div className='UpdateDish-Buttons'>
                         <button className='UpdateDish-Button btn btn-outline-danger' onClick={props.OpenClose}>ביטול</button>
                         <button className='UpdateDish-Button btn btn-danger' onClick={deleteDishDisplay}>מחיקת מנה</button>

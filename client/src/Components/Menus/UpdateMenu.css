@@ -54,3 +54,8 @@
 .UpdateDish-Button {
     justify-self: center;
 }
+
+.ingredientsList {
+    width: 100%;
+    display: table-row;
+}

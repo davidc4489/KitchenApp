@@ -4,6 +4,7 @@ import UpdateEvent from './UpdateEvent';
 import {toJewishDate, formatJewishDateInHebrew, toHebrewJewishDate } from "jewish-date";
 import {HebrewCalendar, Location} from '@hebcal/core';
 import { useAuth } from '../../Context/UserContext.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
 
 function Calendar() {
 
@@ -13,15 +14,11 @@ function Calendar() {
     const [dataMenus, setDataMenus] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/menus`)
-        .then(response => response.json())
-        .then(data => setDataMenus(data))
+        Fetch(`http://localhost:4000/api/menus`, setDataMenus)
     }, [dataMenus])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/menusCalendar`)
-        .then(response => response.json())
-        .then(data => setDataMenusCalendar(data))
+        Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar)
     }, [dataMenusCalendar])
 
     function isMatchingDate(DataDate, CalendarDate) {
@@ -31,7 +28,7 @@ function Calendar() {
             parseInt(DataDate.year) === parseInt(CalendarDate.year))
     }
 
-    const [month, setMonth] = useState(new Date().getMonth() + 1);
+    const [month, setMonth] = useState(new Date().getMonth());
     const [year, setYear] = useState(new Date().getFullYear());
     const [Boxes, setBoxes] = useState([]);
     const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 
