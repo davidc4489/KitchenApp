@@ -16,7 +16,7 @@ export const addSupplier = (req, res) => {
         "מוצר": req.body.מוצר,
         "מחיר_ליחידה": req.body.מחיר_ליחידה,
         "יחידה": req.body.יחידה,
-        "זמן_אספקה_בימים": req.body.זמן_אספקה
+        "זמן_אספקה_בימים": req.body.זמן_אספקה_בימים
     }
 
     if (req.body.שם && req.body.טל && req.body.מייל && req.body.קטגוריה && req.body.מוצר && req.body.מחיר_ליחידה && req.body.יחידה && req.body.זמן_אספקה_בימים){

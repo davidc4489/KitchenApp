@@ -19,13 +19,25 @@ export default function Table({data, values, category, allCategories, search, up
                     <tr 
                         style={{cursor: 'pointer'}} 
                         className={index % 2 === 0 ? 'even-row' : 'odd-row'} 
-                        key={item.id} 
-                        onClick={() => updateFunction(item)} 
+                        key={item.id}
+                        // Allows you not to open the updateSupplier window if you click on the email address
+                        onClick={(e) => {
+                            if (!e.target.closest('a')) {
+                                updateFunction(item);
+                            }
+                        }}  
                         title={title}
                     >
                         {values.map((value) => (
-                        <td id={item[value]} className={value === 'כמות' && item.כמות < item.כמות_מינימלית ? 'text-red' : ''}>
-                            {item[value]}
+                        <td key={value} id={item[value]} className={value === 'כמות' && item.כמות < item.כמות_מינימלית ? 'text-red' : ''}>
+                            {value === 'מייל' ? (
+                                // Allows you to open the email sending program if you click on the email address
+                                <a href={`mailto:${item[value]}`} onClick={(e) => e.stopPropagation()}>
+                                    {item[value]}
+                                </a>
+                            ) : (
+                                item[value]
+                            )}
                         </td>
                         ))}
                     </tr>   

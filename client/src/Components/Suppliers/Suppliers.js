@@ -5,6 +5,8 @@ import UpdateSupplier from './UpdateSupplier.js';
 import { useAuth } from '../../Context/UserContext.jsx';
 import Table from '../../Tools/Table.jsx';
 import Dropdown from '../../Tools/Dropdown.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
+import Input from '../../Tools/Input.jsx';
 
 function Suppliers() {
 
@@ -14,15 +16,18 @@ function Suppliers() {
     const [category, setCategory] = useState('כל הספקים')
     const [supplierToUpdate, setSupplierToUpdate] = useState(null)
     const [search, setSearch] = useState('')
+    const [dataCategories, setDataCategories] = useState([])
 
     const [showAddSupplierDialog, setShowAddSupplierDialog] = useState(false)
     const [showUpdateSupplierDialog, setShowUpdateSupplierDialog] = useState(false)
 
-    const dataCategories = [
-        {id: 0, שם: 'סכו"ם'},
-        {id: 1, שם: 'אוכל'},
-        {id: 2, שם: 'שתיה'}
-    ];
+    useEffect(() => {
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
+    }, [dataCategories])
+
+    useEffect(() => {
+        Fetch(`http://localhost:4000/api/suppliers`, setDataSuppliers)
+    }, [dataSuppliers])
 
     function openAddSupplierDialog (){
         setShowAddSupplierDialog(!showAddSupplierDialog)
@@ -41,12 +46,6 @@ function Suppliers() {
         setSearch(event.target.value)
     }
 
-    useEffect(() => {
-        fetch(`http://localhost:4000/api/suppliers`)
-        .then(response => response.json())
-        .then(data => setDataSuppliers(data))
-    }, [dataSuppliers])
-
     return (
         <>
             {access ?
@@ -56,9 +55,9 @@ function Suppliers() {
                     <div className='Suppliers-TitlePage'>{category}</div>
                     <button type="button" className="btn btn-secondary" onClick={() => setShowAddSupplierDialog(true)}>הוסף ספק</button>
                 </div>
-                <div className='SuppliersPage-SearchBox'>
-                    <input type='text' className='SuppliersPage-SearchBox-Input' placeholder='חיפוש ספק לפי שם' value={search} onChange={updateSearch}></input>
-                </div>
+
+                <Input type='text' className={"form-control w-25 p-1 mx-auto p-2"} placeholder='חיפוש ספק לפי שם' value={search} onChange={setSearch}/>
+                
                 {dataSuppliers.length &&
                     <Table data={dataSuppliers} values={["id", "שם", "טל", "מייל", "קטגוריה", "מוצר", "מחיר_ליחידה", "יחידה", "זמן_אספקה_בימים"]} category={category} allCategories={"כל הספקים"} search={search} updateFunction={updateSupplier} title={"עריכת ספק"}/>
                 }

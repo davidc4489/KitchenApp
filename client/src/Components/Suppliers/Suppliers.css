@@ -16,58 +16,8 @@
     background: lightgrey;
 }
 
-.SuppliersPage-AddSupplier-Button{
-    background: rgb(43, 43, 44);
-    border: none;
-    cursor: pointer;
-    color: white;
-}
-
-.SuppliersPage-AddSupplier-Button:hover{
-    background: lightgrey;
-}
-
-.SuppliersPage-SearchBox{
-    text-align: center;
-    padding: 10px;
-}
-
-.SuppliersPage-SearchBox-Input{
-    width: 20vw;
-    margin: 20px;
-    padding: 1px;
-}
-
 .Suppliers-TitlePage{
     text-align: center;
     padding: 10px;
-}
-
-.Suppliers-Headers {
-    background-color: white;
-    display: inline-flex;
-    grid-template-columns: repeat(6, 1fr);
-    text-align: center;
-    font-weight: bolder;
-    width: 100%;
-  }
-
-.Suppliers-Header{
-    width: 10.1vw;
-    min-width: fit-content;
-}
-
-.Suppliers-SupplierRow {
-    background-color: white;
-    display: inline-flex;
-    grid-template-columns: repeat(6, 1fr);
-    text-align: center;
-    margin-top: 10px;
-    width: 100%;
-    border: none;
-    cursor: pointer;
-  }
-
-.Suppliers-row-field{
-    width: 10.1vw;
+    font-weight: bold;
 }

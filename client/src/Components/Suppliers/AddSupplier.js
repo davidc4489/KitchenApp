@@ -1,84 +1,82 @@
 import React, { useEffect, useState, } from 'react'
 import './AddSupplier.css'
+import Fetch from '../../Tools/Fetch';
+import Input from '../../Tools/Input';
+import Select from '../../Tools/Select';
 
 function AddSupplier(props) {
    
-    const [addValues, setAddValues] = useState({
-        שם: '',
-        טל: '',
-        מייל: '',
-        קטגוריה: '',
-        מוצר: '',
-        מחיר_ליחידה: '',
-        יחידה: '',
-        זמן_אספקה_בימים:  ''
-    });
+    const [name, setName] = useState("");
+    const [tel, setTel] = useState("");
+    const [mail, setMail] = useState("");
+    const [category, setCategory] = useState("");
+    const [product, setProduct] = useState("");
+    const [priceForUnit, setPriceForUnit] = useState("");
+    const [unit, setUnit] = useState("");
+    const [deliveryTime, setDeliveryTime] = useState("");
+
+    const unitsCategories = [{שם: 'ק"ג'},{שם: "ליטר"},{שם: "יחידה"}]
+    const [dataCategories, setDataCategories] = useState([])
 
     const [dataStock, setDataStock] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock`)
-        .then(response => response.json())
-        .then(data => setDataStock(data))
+        Fetch(`http://localhost:4000/api/stock`, setDataStock)
     }, [dataStock])
 
-    function updateData(event) {
-        setAddValues({
-            ...addValues,
-            [event.target.name]: event.target.value
-        })
-    }
+    useEffect(() => {
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
+    }, [dataCategories])
 
     function saveData() {
-            fetch('http://localhost:4000/api/suppliers/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(addValues),
-            })
-                .then(response => {response.json()
+        const addedValues = {
+            שם: name,
+            טל: tel,
+            מייל: mail,
+            קטגוריה: category,
+            מוצר: product,
+            מחיר_ליחידה: priceForUnit,
+            יחידה: unit,
+            זמן_אספקה_בימים: parseInt(deliveryTime)
+        };
+        fetch('http://localhost:4000/api/suppliers/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(addedValues),
+        })
+            .then(response => {response.json()
     })}
 
     return (
-        <div className='AddSupplier-box'>
-            <form className='AddSupplier-Box-Content'>
+        <>
+            <form className='AddSupplier-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
                 <div className='AddSupplier-Title'>הוסף ספק</div>
                 <div className='AddSupplier-InputBox'>
                     <label className='AddSupplier-Label'>שם: </label>
-                    <input className='AddSupplierPage-Input' type="text" name='שם' value={addValues.שם} onChange={updateData} required /> 
+                    <Input type="text" value={name} onChange={setName}/> 
                     <label className='AddSupplier-Label'>טל: </label>
-                    <input className='AddSupplierPage-Input' type="text" name='טל' value={addValues.טל} onChange={updateData} required /> 
+                    <Input type="text" value={tel} onChange={setTel}/> 
                     <label className='AddSupplier-Label'>מייל: </label>
-                    <input className='AddSupplierPage-Input' type="email" name='מייל' value={addValues.מייל} onChange={updateData} required /> 
+                    <Input type="email" value={mail} onChange={setMail}/>
+                    <label className='AddSupplier-Label'>קטגוריה: </label>
+                    <Select id='category' onChange={setCategory} value={category} title='בחר קטגוריה' optionValue='' optionsToMap={dataCategories} valueToMap="שם"/>
                     <label className='AddSupplier-Label'>מוצר: </label>
-                    <select name='מוצר' className='user-select-input' onChange={updateData} value={addValues.מוצר} >
-                        <option value="">בחר מוצר</option>
-                        {dataStock?.map((item) => (
-                            <option key={item.id} value={item.שם}>
-                                {item.שם}
-                            </option> 
-                        ))}
-                    </select>
+                    <Select id='product' onChange={setProduct} value={product} title='בחר מוצר' optionValue='' optionsToMap={dataStock} valueToMap="שם"/>
                     <label className='AddSupplier-Label'>מחיר ליחידה: </label>
-                    <input className='AddSupplierPage-Input' type='number' name='מחיר_ליחידה' value={addValues.מחיר_ליחידה} onChange={updateData}/>
+                    <Input type='number' value={priceForUnit} onChange={setPriceForUnit}/>
                     <label className='AddSupplier-Label'>יחידה: </label>
-                    <select name='יחידה' value={addValues.יחידה} onChange={updateData} required pattern=".*\S+.*" title="יש למלא השדה">
-                        <option value=''>בחר יחידה</option> 
-                        <option value='ק"ג'>ק"ג</option>                       
-                        <option value='ליטר'>ליטר</option>
-                        <option value='יחידה'>יחידה</option>                                           
-                     </select>
+                    <Select id='unit' value={unit} onChange={setUnit} title='בחר יחידה' optionValue='' optionsToMap={unitsCategories} valueToMap="שם"/>
                     <label className='AddSupplier-Label'>זמן אספקה בימים: </label>
-                    <input className='AddSupplierPage-Input' type='number' name='זמן_אספקה_בימים' value={addValues.זמן_אספקה_בימים} onChange={updateData}/>
+                    <Input type='number' value={deliveryTime} onChange={setDeliveryTime}/>
                 </div>
-
-                    <div className='AddSupplier-Buttons'>
-                        <button className='AddSupplier-Button' onClick={props.OpenClose}>ביטול</button>
-                        <input type="submit" value={'שמירה'} className='AddSupplier-Button' onClick={saveData}></input>
-                    </div>
+                <div className='AddSupplier-Buttons'>
+                    <button className='AddDish-Button btn btn-outline-danger' onClick={props.OpenClose}>ביטול</button>
+                    <input type="submit" value={'שמירה'} className='AddDish-Button btn btn-outline-primary' onClick={saveData}></input>
+                </div>
             </form>
-        </div>
+        </>
     )
 }
 
