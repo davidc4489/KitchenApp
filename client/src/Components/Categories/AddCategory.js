@@ -4,6 +4,8 @@ import Input from '../../Tools/Input';
 import Select from '../../Tools/Select';
 
 function AddCategory(props) {
+
+    const token = props.Token
    
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
@@ -18,6 +20,7 @@ function AddCategory(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(addedValues),
         })

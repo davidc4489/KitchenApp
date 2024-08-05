@@ -14,11 +14,11 @@ function Calendar() {
     const [dataMenus, setDataMenus] = useState([])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus`, setDataMenus)
+        Fetch(`http://localhost:4000/api/menus`, setDataMenus, token)
     }, [dataMenus])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar)
+        Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar, token)
     }, [dataMenusCalendar])
 
     function isMatchingDate(DataDate, CalendarDate) {
@@ -187,7 +187,7 @@ function Calendar() {
                             ))}
                         </div>
                     ))}
-                    {showUpdateEventDialog ? <UpdateEvent OpenClose={openUpdateEventDialog} EventToUpdate={eventToUpdate}/> : null}  
+                    {showUpdateEventDialog ? <UpdateEvent OpenClose={openUpdateEventDialog} EventToUpdate={eventToUpdate} Token={token}/> : null}  
                 </section>
             </section>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </div>

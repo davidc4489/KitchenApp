@@ -7,6 +7,8 @@ import Input from '../../Tools/Input.jsx'
 function UpdateDishIngredients(props) {
 
     const dishToUpdate = props.DishToUpdate
+    const token = props.Token
+
     const [ingredientId, setIngredientId] = useState('');
     const [ingredientAmount, setIngredientAmount] = useState('');
     const [ingredientUnity, setIngredientUnity] = useState('גרם');
@@ -19,11 +21,11 @@ function UpdateDishIngredients(props) {
     });
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock`, setDataStock)
-    }, [])
+        Fetch(`http://localhost:4000/api/stock`, setDataStock, token)
+    }, [dataStock])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes/dishIngredients/${dishToUpdate.id}`, setDataDishIngredients)
+        Fetch(`http://localhost:4000/api/dishes/dishIngredients/${dishToUpdate.id}`, setDataDishIngredients, token)
     }, [])
 
     function addIngredient(event) {
@@ -101,6 +103,7 @@ function UpdateDishIngredients(props) {
                 method: 'PUT', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
                 },
                 body: JSON.stringify(updateValues),  
             })

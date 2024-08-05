@@ -9,6 +9,8 @@ import Fetch from '../../Tools/Fetch.jsx';
 function UpdateDish(props) {
 
     const dishToUpdate = props.DishToUpdate
+    const token = props.Token
+
     const [formMode, setFormMode] = useState('edit');
     const [name, setName] = useState(dishToUpdate.שם,);
     const [category, setCategory] = useState(dishToUpdate.קטגוריה);
@@ -20,15 +22,21 @@ function UpdateDish(props) {
     const [deleteDishBox, setDeleteDishBox] = useState(false)
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock`, setDataStock)
+        if(token) {
+            Fetch(`http://localhost:4000/api/stock`, setDataStock, token)
+        }
     }, [])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories)
+        if(token) {
+            Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories, token)
+        }
     }, [])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes/dishIngredients/${dishToUpdate.id}`, setDataDishIngredients)
+        if(token) {
+            Fetch(`http://localhost:4000/api/dishes/dishIngredients/${dishToUpdate.id}`, setDataDishIngredients, token)
+        }
     }, [dataDishIngredients])
 
     function openUpdateDishIngredientsDialog (){
@@ -49,6 +57,7 @@ function UpdateDish(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(updateValues),
         })
@@ -67,6 +76,7 @@ function UpdateDish(props) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(dishToUpdate),
         })
@@ -113,7 +123,7 @@ function UpdateDish(props) {
                     </div>
                 </div>
             </form>
-            {showUpdateDishIngredientsDialog ? <UpdateDishIngredients OpenClose={openUpdateDishIngredientsDialog} DishToUpdate={dishToUpdate}/> : null} 
+            {showUpdateDishIngredientsDialog ? <UpdateDishIngredients OpenClose={openUpdateDishIngredientsDialog} DishToUpdate={dishToUpdate} Token={token}/> : null} 
             {deleteDishBox ? <DeleteVerification deleteFunction={deleteDish} OpenClose={props.OpenClose} CloseBox={setDeleteDishBox} Text={"? למחוק את המנה"}/> : null}
         </>
     )

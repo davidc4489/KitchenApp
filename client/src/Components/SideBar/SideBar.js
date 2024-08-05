@@ -1,5 +1,6 @@
 import './SideBar.css'
 import React, { useEffect, useState } from 'react'
+import { useAuth } from '../../Context/UserContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import home_icon from '../../Images/home.png'
 import login_icon from '../../Images/login.gif'
@@ -16,25 +17,28 @@ import alert_icon from '../../Images/alert.png'
 import calendar_icon from '../../Images/calendar.png'
 import messages_icon from '../../Images/messages.png'
 import notes_icon from '../../Images/notes.png'
+import Fetch from '../../Tools/Fetch.jsx';
 
 export default function Sidebar() {
 
     const navigate = useNavigate(); 
 
+    const { access, token } = useAuth();
+
     const [dataStock, setDataStock] = useState([])
     const [dataSuppliersOrdersCalendar, setDataSuppliersOrdersCalendar] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/suppliersOrdersCalendar`)
-        .then(response => response.json())
-        .then(data => setDataSuppliersOrdersCalendar(data))
+        if(token) {
+            Fetch(`http://localhost:4000/api/suppliersOrdersCalendar`, setDataSuppliersOrdersCalendar, token)
+        }
     }, [dataSuppliersOrdersCalendar])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock`)
-        .then(response => response.json())
-        .then(data => setDataStock(data))
-    }, [])
+        if(token) {
+            Fetch(`http://localhost:4000/api/stock`, setDataStock, token)
+        }
+    }, [dataStock])
 
     function goToHome() {
         navigate('/');

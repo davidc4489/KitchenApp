@@ -5,13 +5,15 @@ import Select from '../../Tools/Select.jsx';
 import Fetch from '../../Tools/Fetch.jsx';
 
 function AddDish(props) {
+
+    const token = props.Token
    
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
     const [dataCategories, setDataCategories] = useState([])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories)
+        Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories, token)
     }, [dataCategories])
 
     function saveData() {
@@ -23,6 +25,7 @@ function AddDish(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(addedValues),
         })

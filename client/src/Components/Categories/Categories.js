@@ -10,7 +10,7 @@ import Table from '../../Tools/Table.jsx';
 
 function Categories() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
 
     const [dataStockCategories, setDataStockCategories] = useState([])
     const [dataMenusCategories, setDataMenusCategories] = useState([])
@@ -26,15 +26,15 @@ function Categories() {
     const [showUpdateCategoryDialog, setShowUpdateCategoryDialog] = useState(false)
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus/categories`, setDataMenusCategories)
+        Fetch(`http://localhost:4000/api/menus/categories`, setDataMenusCategories, token)
     }, [dataMenusCategories])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock/categories`, setDataStockCategories)
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataStockCategories, token)
     }, [dataStockCategories])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes/categories`, setDataDishesCategories)
+        Fetch(`http://localhost:4000/api/dishes/categories`, setDataDishesCategories, token)
     }, [dataDishesCategories])
 
     useEffect(() => {
@@ -82,8 +82,8 @@ function Categories() {
                     <Table data={allCategories} values={["שם","קטגוריה"]} category={category} allCategories={"כל הקטגוריות"} search={search} updateFunction={updateCategory} title={"עריכת קטגוריה"}/>
                 } 
 
-                {showAddCategoryDialog ? <AddCategory OpenClose={openAddCategoryDialog}/> : null}
-                {showUpdateCategoryDialog ? <UpdateCategory OpenClose={openUpdateCategoryDialog} CategoryToUpdate={categoryToUpdate}/> : null}  
+                {showAddCategoryDialog ? <AddCategory OpenClose={openAddCategoryDialog} Token={token}/> : null}
+                {showUpdateCategoryDialog ? <UpdateCategory OpenClose={openUpdateCategoryDialog} CategoryToUpdate={categoryToUpdate} Token={token}/> : null}  
                 
                 </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </>

@@ -1,12 +1,12 @@
 import express from "express";
-
+import { authenticateToken } from "../Middleware/middleware.js";
 import {getMenusCalendar, addEvent, updateStock} from "../Controllers/menusCalendar.js";
 
 const router = express.Router();
 
-router.get("/", getMenusCalendar)
-router.get("/updateStock", updateStock)
+router.get("/", authenticateToken, getMenusCalendar)
+router.get("/updateStock", authenticateToken, updateStock)
 
-router.post("/add", addEvent)
+router.post("/add", authenticateToken, addEvent)
 
 export default router;

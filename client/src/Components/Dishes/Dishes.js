@@ -10,7 +10,7 @@ import Fetch from '../../Tools/Fetch.jsx';
 
 function Dishes() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
 
     const [dataDishes, setDataDishes] = useState([])
     const [category, setCategory] = useState('כל המנות')
@@ -22,11 +22,15 @@ function Dishes() {
     const [showUpdateDishDialog, setShowUpdateDishDialog] = useState(false)
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories)
+        if(token) {
+            Fetch(`http://localhost:4000/api/dishes/categories`, setDataCategories, token)
+        }
     }, [dataCategories])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes`, setDataDishes)
+        if(token) {
+            Fetch(`http://localhost:4000/api/dishes`, setDataDishes, token)
+        }
     }, [dataDishes])
 
     function openAddDishDialog (){
@@ -58,8 +62,8 @@ function Dishes() {
                     <Table data={dataDishes} values={["שם", "קטגוריה", "כשרות", "עלות"]} category={category} allCategories={"כל המנות"} search={search} updateFunction={updateDish} title={"עריכת מנה"}/>
                 }
 
-                {showAddDishDialog ? <AddDish OpenClose={openAddDishDialog}/> : null}
-                {showUpdateDishDialog ? <UpdateDish OpenClose={openUpdateDishDialog} DishToUpdate={dishToUpdate}/> : null}  
+                {showAddDishDialog ? <AddDish OpenClose={openAddDishDialog} Token={token}/> : null}
+                {showUpdateDishDialog ? <UpdateDish OpenClose={openUpdateDishDialog} DishToUpdate={dishToUpdate} Token={token}/> : null}  
 
             </div>:
             <div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}

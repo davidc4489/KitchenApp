@@ -7,6 +7,8 @@ import Fetch from '../../Tools/Fetch.jsx';
 
 function UpdateEvent (props) {
 
+    const token = props.Token
+    
     const [dataMenus, setDataMenus] = useState([])
     const [dataMenusCalendar, setDataMenusCalendar] = useState([])
 
@@ -19,14 +21,12 @@ function UpdateEvent (props) {
     const [amount, setAmount] = useState("");
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus`, setDataMenus)
+        Fetch(`http://localhost:4000/api/menus`, setDataMenus, token)
     }, [])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar)
+        Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar, token)
     }, [dataMenusCalendar])
-
-    console.log("dataMenusCalendar", dataMenusCalendar)
 
     function saveData() {
         const updateValues = {
@@ -57,6 +57,7 @@ function UpdateEvent (props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` })
                 },
                 body: JSON.stringify(updateValues),
             })

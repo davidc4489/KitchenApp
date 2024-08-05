@@ -7,6 +7,7 @@ import DeleteVerification from '../../Tools/DeleteVerification.jsx';
 function UpdateCategory(props) {
 
     const categoryToUpdate = props.CategoryToUpdate
+    const token = props.Token
 
     const [name, setName] = useState(categoryToUpdate.שם);
     const [category, setCategory] = useState(categoryToUpdate.קטגוריה);
@@ -25,6 +26,7 @@ function UpdateCategory(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(updateValues),
         })
@@ -43,6 +45,7 @@ function UpdateCategory(props) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(categoryToUpdate),
         })
