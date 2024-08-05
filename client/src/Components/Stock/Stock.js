@@ -38,7 +38,7 @@ function Stock() {
         if (token) {
             Fetch(`http://localhost:4000/api/stock`, setDataStock, token);
         }
-    }, [token]);
+    }, [dataStock, token]);
 
     useEffect(() => {
         if (token) {
