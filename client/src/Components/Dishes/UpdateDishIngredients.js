@@ -52,7 +52,6 @@ function UpdateDishIngredients(props) {
                 ingredients: [...prevState.ingredients, newIngredient]
             }));
         }
-            console.log(updateIngredient)
             setIngredientAmount('');
             setIngredientId('');
     }
@@ -67,8 +66,6 @@ function UpdateDishIngredients(props) {
     }
 
     function checkForTypeConflict() {
-        console.log("Update Values:", updateValues);
-        
         // Récupère les IDs des ingrédients de updateValues et dataDishIngredients
         const ingredientIdsUpdateValues = updateValues.ingredients.map(ingredient => parseInt(ingredient.id));
         const ingredientIdsDishIngredients = dataDishIngredients.map(ingredient => parseInt(ingredient.idIngredient));
@@ -79,14 +76,11 @@ function UpdateDishIngredients(props) {
         // Filtre les produits dans dataStock pour ne garder que ceux qui sont dans allIngredientIds
         const products = dataStock.filter(product => allIngredientIds.has(parseInt(product.id)));
     
-        console.log("Products:", products);
-    
         // Vérifie s'il y a des produits de type 'חלבי' et 'בשרי'
         const hasLait = products.some(product => product.כשרות === 'חלבי');
         const hasViande = products.some(product => product.כשרות === 'בשרי');
     
         if (hasLait && hasViande) {
-            console.log("Conflit de types");
             return true;
         }
         return false;

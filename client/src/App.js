@@ -14,16 +14,21 @@ import Messages from "./Components/Messages/Messages.js";
 import Notes from "./Components/Notes/Notes.js";
 import Settings from "./Components/Settings/Settings.js";
 import { AuthProvider } from "./Context/UserContext.jsx";
-import { UpdateUserProvider } from "./Context/UserToUpdateContext.jsx";
 import Sidebar from "./Components/SideBar/SideBar.js";
+
+// AuthProvider: Provides an authentication context to manage user login state and permissions.
+// UpdateUserProvider: Provides context to manage user information to be updated.
+import { UpdateUserProvider } from "./Context/UserToUpdateContext.jsx";
 
 function App() {
 
+  //  Layout of application elements
   const Layout = () => {
     return(
       <div className="layout-container">
       <Sidebar />
       <div className="outlet-container">
+        {/* Insertion point for child components in a nested route structure. */}
         <Outlet />
       </div>
     </div>

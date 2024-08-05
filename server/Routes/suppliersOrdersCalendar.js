@@ -1,15 +1,15 @@
 import express from "express";
-
+import { authenticateToken } from "../Middleware/middleware.js";
 import {getSuppliersOrdersCalendar, getSuppliersOrdersMessages, updateSupplierOrder, supplierOrderToGarbage, addSupplierOrder } from "../Controllers/suppliersOrdersCalendar.js";
 
 const router = express.Router();
 
-router.get("/", getSuppliersOrdersCalendar)
-router.get("/Messages", getSuppliersOrdersMessages)
+router.get("/", authenticateToken, getSuppliersOrdersCalendar)
+router.get("/Messages", authenticateToken, getSuppliersOrdersMessages)
 
-router.put("/toGarbage/", supplierOrderToGarbage)
-router.put("/readed", updateSupplierOrder)
+router.put("/toGarbage/", authenticateToken, supplierOrderToGarbage)
+router.put("/readed", authenticateToken, updateSupplierOrder)
 
-router.post("/add", addSupplierOrder)
+router.post("/add", authenticateToken, addSupplierOrder)
 
 export default router;

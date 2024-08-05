@@ -7,7 +7,7 @@ import Dropdown from '../../Tools/Dropdown.jsx';
 
 function Messages() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
 
     const [dataOrders, setDataOrders] = useState([])
     const [category, setCategory] = useState('כל ההודעות')
@@ -30,7 +30,7 @@ function Messages() {
     }
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/suppliersOrdersCalendar/Messages`, setDataOrders)
+        Fetch(`http://localhost:4000/api/suppliersOrdersCalendar/Messages`, setDataOrders, token)
     }, [dataOrders])
 
     const handleCheckboxChange = (order) => {
@@ -39,6 +39,7 @@ function Messages() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify({id}),
         })
@@ -77,7 +78,7 @@ function Messages() {
                                     </div>
                                 </div>
                             ))}
-                            {showMessageToDeleteDialog && <DeleteMessage OpenClose={openMessageToDeleteDialog} MessageToDelete={messageToDelete} />}
+                            {showMessageToDeleteDialog && <DeleteMessage OpenClose={openMessageToDeleteDialog} MessageToDelete={messageToDelete} Token={token}/>}
                         </div>}
                 </div> :
                 <div className="alert alert-warning text-center">נא להזדהות עבור גישה לנתונים</div>

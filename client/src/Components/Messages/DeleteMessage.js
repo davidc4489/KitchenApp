@@ -5,6 +5,7 @@ import '../Notes/AddNote.css'
 function DeleteMessage(props) {
 
     const messageToDelete = props.MessageToDelete
+    const token = props.Token
 
     const garbageCheckboxChange = () => {
         let id = messageToDelete.id
@@ -12,6 +13,7 @@ function DeleteMessage(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify({id}),
         })

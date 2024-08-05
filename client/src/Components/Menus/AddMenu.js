@@ -2,17 +2,18 @@ import React, { useEffect, useState, } from 'react'
 import './AddMenu.css'
 import Input from '../../Tools/Input';
 import Select from '../../Tools/Select';
+import Fetch from '../../Tools/Fetch';
 
 function AddMenu(props) {
+
+    const token = props.Token
 
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
     const [dataCategories, setDataCategories] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/menus/categories`)
-        .then(response => response.json())
-        .then(data => setDataCategories(data.reverse()))
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories, token)
     }, [dataCategories])
 
     function saveData() {
@@ -26,6 +27,7 @@ function AddMenu(props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` })
                 },
                 body: JSON.stringify(addedValues),
             })

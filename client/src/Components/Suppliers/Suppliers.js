@@ -10,7 +10,7 @@ import Input from '../../Tools/Input.jsx';
 
 function Suppliers() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
 
     const [dataSuppliers, setDataSuppliers] = useState([])
     const [category, setCategory] = useState('כל הספקים')
@@ -22,11 +22,11 @@ function Suppliers() {
     const [showUpdateSupplierDialog, setShowUpdateSupplierDialog] = useState(false)
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories, token)
     }, [dataCategories])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/suppliers`, setDataSuppliers)
+        Fetch(`http://localhost:4000/api/suppliers`, setDataSuppliers, token)
     }, [dataSuppliers])
 
     function openAddSupplierDialog (){
@@ -61,8 +61,8 @@ function Suppliers() {
                 {dataSuppliers.length &&
                     <Table data={dataSuppliers} values={["id", "שם", "טל", "מייל", "קטגוריה", "מוצר", "מחיר_ליחידה", "יחידה", "זמן_אספקה_בימים"]} category={category} allCategories={"כל הספקים"} search={search} updateFunction={updateSupplier} title={"עריכת ספק"}/>
                 }
-                {showAddSupplierDialog ? <AddSupplier OpenClose={openAddSupplierDialog}/> : null}
-                {showUpdateSupplierDialog ? <UpdateSupplier OpenClose={openUpdateSupplierDialog} SupplierToUpdate={supplierToUpdate}/> : null} 
+                {showAddSupplierDialog ? <AddSupplier OpenClose={openAddSupplierDialog} Token={token}/> : null}
+                {showUpdateSupplierDialog ? <UpdateSupplier OpenClose={openUpdateSupplierDialog} SupplierToUpdate={supplierToUpdate} Token={token}/> : null} 
 
                 </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </>

@@ -37,10 +37,6 @@ export const addEvent = async (req, res) => {
         await add('menusCalendar', newData);
         res.send({ message: 'Data added', data: newData });
     }
-
-    // console.log(newData)
-    // add('menusCalendar', newData);
-    // res.send({ message: 'Data added ' });
 }
 
 export const updateStock = async (req, res) => {

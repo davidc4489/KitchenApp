@@ -9,6 +9,8 @@ import Fetch from '../../Tools/Fetch.jsx';
 function UpdateMenu(props) {
 
     const menuToUpdate = props.MenuToUpdate
+    const token = props.Token
+
     const [formMode, setFormMode] = useState('edit');
     const [name, setName] = useState(menuToUpdate.שם,);
     const [category, setCategory] = useState(menuToUpdate.קטגוריה);
@@ -20,17 +22,15 @@ function UpdateMenu(props) {
     const [deleteMenuBox, setDeleteMenuBox] = useState(false)
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/dishes`, setDataDishes)
+        Fetch(`http://localhost:4000/api/dishes`, setDataDishes, token)
     }, [])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus/categories`, setDataCategories)
+        Fetch(`http://localhost:4000/api/menus/categories`, setDataCategories, token)
     }, [dataCategories])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/menus/menuDishes/${menuToUpdate.id}`)
-        .then(response => response.json())
-        .then(data => setDataMenuDishes(data))
+        Fetch(`http://localhost:4000/api/menus/menuDishes/${menuToUpdate.id}`, setDataMenuDishes, token)
     }, [dataMenuDishes])
 
     function openUpdateMenuDishesDialog (){
@@ -52,6 +52,7 @@ function UpdateMenu(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(updateValues),
         })
@@ -70,6 +71,7 @@ function UpdateMenu(props) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(menuToUpdate),
         })
@@ -112,7 +114,7 @@ function UpdateMenu(props) {
                     </div>
                 </div>
             </form>
-            {showUpdateMenuDishesDialog ? <UpdateMenuDishes OpenClose={openUpdateMenuDishesDialog} MenuToUpdate={menuToUpdate}/> : null} 
+            {showUpdateMenuDishesDialog ? <UpdateMenuDishes OpenClose={openUpdateMenuDishesDialog} MenuToUpdate={menuToUpdate} Token={token}/> : null} 
             {deleteMenuBox ? <DeleteVerification deleteFunction={deleteMenu} OpenClose={props.OpenClose} CloseBox={setDeleteMenuBox} Text={"? למחוק את התפריט"}/> : null}
         </>
     )

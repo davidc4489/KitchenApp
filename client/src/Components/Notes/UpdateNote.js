@@ -5,6 +5,7 @@ import DeleteVerification from '../../Tools/DeleteVerification.jsx';
 function UpdateNote(props) {
 
     const noteToUpdate = props.NoteToUpdate
+    const token = props.Token
    
     const [updateValues, setUpdateValues] = useState({
         כותרת: noteToUpdate.כותרת,
@@ -25,6 +26,7 @@ function UpdateNote(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(updateValues),
         })
@@ -43,6 +45,7 @@ function UpdateNote(props) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(noteToUpdate),
         })

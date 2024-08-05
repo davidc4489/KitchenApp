@@ -9,7 +9,6 @@ export default function Input ({type, value, onChange, placeholder, id, required
                 // onChange={(e) => e.target.value > minValue ? onChange(e.target.value): onChange(minValue)}
                 onChange={(e) => {
                     if(minValue != undefined) {
-                        console.log(minValue)
                         e.target.value > minValue ? onChange(e.target.value): onChange(minValue)
                     } 
                     else {

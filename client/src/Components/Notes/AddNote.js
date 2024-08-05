@@ -4,6 +4,8 @@ import './AddNote.css'
 
 function AddNote(props) {
    
+    const token = props.Token
+    
     const [addValues, setAddValues] = useState({
         כותרת: '',
         תוכן: ''
@@ -22,6 +24,7 @@ function AddNote(props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` })
                 },
                 body: JSON.stringify(addValues),
             })

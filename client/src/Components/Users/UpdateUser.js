@@ -9,6 +9,8 @@ import DeleteVerification from '../../Tools/DeleteVerification.jsx';
 function UpdateUser(props) {
 
     const userToUpdate = props.UserToUpdate
+    const token = props.Token
+
     const permissions = [{id: 1, שם: 'מלצר'}, {id: 2, שם: 'עובד מטבח'}, {id: 3, שם: 'מנהל'}]
 
     const [dataUsers, setDataUsers] = useState([])
@@ -37,6 +39,7 @@ function UpdateUser(props) {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` })
                 },
                 body: JSON.stringify(updateValues),
             })
@@ -54,6 +57,7 @@ function UpdateUser(props) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(userToUpdate),
         })
@@ -61,7 +65,7 @@ function UpdateUser(props) {
     }
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/users`, setDataUsers)
+        Fetch(`http://localhost:4000/api/users`, setDataUsers, token)
     }, [dataUsers])
 
     return (

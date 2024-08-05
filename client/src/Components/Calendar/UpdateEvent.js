@@ -14,18 +14,22 @@ function UpdateEvent (props) {
 
     const eventToUpdate = props.EventToUpdate
 
-    const [day, setDay] = useState(eventToUpdate.day,);
-    const [month, setMonth] = useState(eventToUpdate.month);
-    const [year, setYear] = useState(eventToUpdate.year);
+    const day = eventToUpdate.day;
+    const month = eventToUpdate.month;
+    const year = eventToUpdate.year;
     const [idMenu, setIdMenu] = useState(0);
     const [amount, setAmount] = useState("");
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus`, setDataMenus, token)
+        if (token) {
+            Fetch(`http://localhost:4000/api/menus`, setDataMenus, token)
+        }
     }, [])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar, token)
+        if (token) {
+            Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar, token)
+        }
     }, [dataMenusCalendar])
 
     function saveData() {

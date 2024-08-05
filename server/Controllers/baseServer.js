@@ -125,7 +125,6 @@ const getOrdersStatistics = async (req, res) => {
             }
                     });;
                 }).then(data => {
-                    console.log(data)
                     return data
                 })
                 .catch(error => {

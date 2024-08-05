@@ -1,17 +1,17 @@
 import express from "express";
-
+import { authenticateToken } from "../Middleware/middleware.js";
 import {getMenus, getCategories, getDishes, addMenu, updateMenu, removeMenu} from "../Controllers/menus.js";
 
 const router = express.Router();
 
-router.get("/", getMenus)
-router.get("/categories", getCategories)
-router.get("/menuDishes/:id" , getDishes);
+router.get("/", authenticateToken, getMenus)
+router.get("/categories", authenticateToken, getCategories)
+router.get("/menuDishes/:id" , authenticateToken, getDishes);
 
-router.post("/add", addMenu)
-router.delete("/:id", removeMenu)
+router.post("/add", authenticateToken, addMenu)
+router.delete("/:id", authenticateToken, removeMenu)
 
-router.put("/:id", updateMenu)
+router.put("/:id", authenticateToken, updateMenu)
 
 
 export default router;

@@ -4,25 +4,22 @@ import UpdateEvent from './UpdateEvent';
 import {toJewishDate, formatJewishDateInHebrew, toHebrewJewishDate } from "jewish-date";
 import {HebrewCalendar, Location} from '@hebcal/core';
 import { useAuth } from '../../Context/UserContext.jsx';
+import Fetch from '../../Tools/Fetch.jsx';
 
 
 function SuppliersOrdersCalendar() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
     
     const [dataSuppliersOrdersCalendar, setDataSuppliersOrdersCalendar] = useState([])
     const [dataStock, setDataStock] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/suppliersOrdersCalendar`)
-        .then(response => response.json())
-        .then(data => setDataSuppliersOrdersCalendar(data))
+        Fetch(`http://localhost:4000/api/suppliersOrdersCalendar`, setDataSuppliersOrdersCalendar, token)
     }, [dataSuppliersOrdersCalendar])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock`)
-        .then(response => response.json())
-        .then(data => setDataStock(data))
+        Fetch(`http://localhost:4000/api/stock`, setDataStock, token)
     }, [dataStock])
 
     function isMatchingDate(DataDate, CalendarDate) {
@@ -191,7 +188,7 @@ function SuppliersOrdersCalendar() {
                             ))}
                         </div>
                     ))}
-                    {showUpdateEventDialog ? <UpdateEvent OpenClose={openUpdateEventDialog} EventToUpdate={eventToUpdate}/> : null}  
+                    {showUpdateEventDialog ? <UpdateEvent OpenClose={openUpdateEventDialog} EventToUpdate={eventToUpdate} Token={token}/> : null}  
                 </section>
             </section>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </div>

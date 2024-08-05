@@ -40,7 +40,6 @@ function UpdateCategory(props) {
 
     function deleteCategory() {
         props.OpenClose()
-        console.log('categoryToUpdate', categoryToUpdate)
         fetch(`http://localhost:4000/api/categories/${categoryToUpdate.originalId}`, {
             method: 'DELETE',
             headers: {

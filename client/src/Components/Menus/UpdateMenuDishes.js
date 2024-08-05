@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './UpdateMenuDishes.css';
 import Select from '../../Tools/Select';
+import Fetch from '../../Tools/Fetch';
 
 function UpdateMenuDishes(props) {
 
+    const token = props.Token
     const menuToUpdate = props.MenuToUpdate
     const [dishId, setDishId] = useState('');
     const [dataDishes, setDataDishes] = useState([])
@@ -15,15 +17,11 @@ function UpdateMenuDishes(props) {
     });
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/dishes`)
-        .then(response => response.json())
-        .then(data => setDataDishes(data))
+        Fetch(`http://localhost:4000/api/dishes`, setDataDishes, token)
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/menus/menuDishes/${menuToUpdate.id}`)
-        .then(response => response.json())
-        .then(data => setDataMenuDishes(data))
+        Fetch(`http://localhost:4000/api/menus/menuDishes/${menuToUpdate.id}`, setDataMenuDishes, token)
     }, [])
 
     function addDish(event) {
@@ -63,8 +61,6 @@ function UpdateMenuDishes(props) {
     }
 
     function checkForTypeConflict() {
-        console.log("Update Values:", updateValues);
-        
         // Récupère les IDs des ingrédients de updateValues et dataDishIngredients
         const dishesIdsUpdateValues = updateValues.dishes.map(dish => parseInt(dish.id));
         const dishesIdsMenuDishes = dataMenuDishes.map(dish => parseInt(dish.idDish));
@@ -74,8 +70,6 @@ function UpdateMenuDishes(props) {
     
         // Filtre les produits dans dataStock pour ne garder que ceux qui sont dans allIngredientIds
         const dishes = dataDishes.filter(dish => allDishesIds.has(parseInt(dish.id)));
-    
-        console.log("Dishes:", dishes);
     
         // Vérifie s'il y a des produits de type 'חלבי' et 'בשרי'
         const hasLait = dishes.some(dish => dish.כשרות === 'חלבי');
@@ -94,8 +88,7 @@ function UpdateMenuDishes(props) {
             alert("תפריט אינו יכול להכיל מנות חלביות ובשריות ביחד")
             return;
         }
-        console.log("dataMenuDishes", dataMenuDishes)
-        console.log("updateValues.dishes", updateValues.dishes)
+
         const newDishes = dataMenuDishes
             .filter(item => !updateValues.dishes.some(dish => parseInt(dish.id) === parseInt(item.idDish)))
             .map(item => ({ id: parseInt(item.idDish) }));
@@ -120,6 +113,7 @@ function UpdateMenuDishes(props) {
                 method: 'PUT', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` })
                 },
                 body: JSON.stringify(updatedFirstObject),  
             })

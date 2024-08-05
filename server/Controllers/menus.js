@@ -72,8 +72,6 @@ export const updateMenu = async (req, res) => {
     // Récupère les nouvelles données des plats du menu fournies par l'utilisateur
     let newDishesData = []
 
-    console.log("req.body.dishes", req.body)
-
     if(req.body.dishes){
         for(let i = 0; i < req.body.dishes.length; i++) {
             let newDish = {}
@@ -142,7 +140,6 @@ const updateKashrutMenu = async (collection, idMenu) => {
                 ["פרווה", idMenu],
                 `Kashrut Data for id ${idMenu} updated successfully`
             );
-            console.log("Vide");
             return;
         }
 
@@ -168,7 +165,6 @@ const updateKashrutMenu = async (collection, idMenu) => {
                     ["חלבי", idMenu],
                     `Kashrut Data for id ${idMenu} updated successfully`
                 );
-                console.log('Type lait trouvé');
                 return; // Arrête la boucle dès qu'un type lait est trouvé
             } else if (currentDish && currentDish.כשרות === 'בשרי') {
                 await runKashrutQuery(
@@ -176,7 +172,6 @@ const updateKashrutMenu = async (collection, idMenu) => {
                     ["בשרי", idMenu],
                     `Kashrut Data for id ${idMenu} updated successfully`
                 );
-                console.log('Type viande trouvé');
                 return; // Arrête la boucle dès qu'un type viande est trouvé
             }
         }

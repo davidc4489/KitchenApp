@@ -23,7 +23,6 @@ export const addProduct = (req, res) => {
         "יחידה": req.body.יחידה,
         "כמות_מינימלית": req.body.כמות_מינימלית
     }
-    console.log(newData)
     if (req.body.שם && req.body.קטגוריה && req.body.כשרות && req.body.ספק && req.body.יצרן && req.body.כמות && req.body.יחידה && req.body.כמות_מינימלית){
         add('stock', newData)};
     res.send({ message: 'Data added ' });

@@ -10,7 +10,7 @@ import Fetch from '../../Tools/Fetch.jsx';
 
 function Menus() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
 
     const [dataMenus, setDataMenus] = useState([])
     const [category, setCategory] = useState('כל התפריטים')
@@ -35,11 +35,11 @@ function Menus() {
     }
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus`, setDataMenus)
+        Fetch(`http://localhost:4000/api/menus`, setDataMenus, token)
     }, [dataMenus])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus/categories`, setDataCategories)
+        Fetch(`http://localhost:4000/api/menus/categories`, setDataCategories, token)
     }, [dataMenus])
 
     return (
@@ -58,8 +58,8 @@ function Menus() {
                     <Table data={dataMenus} values={["שם", "קטגוריה", "כשרות", "עלות"]} category={category} allCategories={"כל התפריטים"} search={search} updateFunction={updateMenu} />
                 }
 
-                {showAddMenuDialog ? <AddMenu OpenClose={openAddMenuDialog}/> : null}
-                {showUpdateMenuDialog ? <UpdateMenu OpenClose={openUpdateMenuDialog} MenuToUpdate={menuToUpdate}/> : null}                 
+                {showAddMenuDialog ? <AddMenu OpenClose={openAddMenuDialog} Token={token}/> : null}
+                {showUpdateMenuDialog ? <UpdateMenu OpenClose={openUpdateMenuDialog} MenuToUpdate={menuToUpdate} Token={token}/> : null}                 
                     
             </div>:<div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}
         </>

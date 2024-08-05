@@ -8,6 +8,7 @@ import DeleteVerification from '../../Tools/DeleteVerification.jsx';
 function UpdateSupplier(props) {
 
     const supplierToUpdate = props.SupplierToUpdate
+    const token = props.Token
 
     const [name, setName] = useState(supplierToUpdate.שם);
     const [tel, setTel] = useState(supplierToUpdate.טל);
@@ -25,12 +26,12 @@ function UpdateSupplier(props) {
     const [deleteSupplierBox, setDeleteSupplierBox] = useState(false)
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories, token)
     }, [dataCategories])
 
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock`, setDataStock)
+        Fetch(`http://localhost:4000/api/stock`, setDataStock, token)
     }, [dataStock])
 
     function saveData() {
@@ -48,6 +49,7 @@ function UpdateSupplier(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(updateValues),
         })
@@ -65,6 +67,7 @@ function UpdateSupplier(props) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(supplierToUpdate),
         })

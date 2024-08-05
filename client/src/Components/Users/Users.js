@@ -10,7 +10,7 @@ import Table from '../../Tools/Table.jsx';
 
 function Users() {
 
-    const { access, directionAccess } = useAuth();
+    const { access, directionAccess, token } = useAuth();
 
     const [dataUsers, setDataUsers] = useState([])
     const [category, setCategory] = useState('כל המשתמשים')
@@ -36,7 +36,7 @@ function Users() {
     }
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/users`, setDataUsers)
+        Fetch(`http://localhost:4000/api/users`, setDataUsers, token)
     }, [dataUsers])
 
     return (
@@ -54,8 +54,8 @@ function Users() {
                 {dataUsers.length &&
                     <Table data={dataUsers} values={["שם","מייל", "סיסמה", "הרשאה"]} category={category} allCategories={"כל המשתמשים"} search={search} updateFunction={updateUser} title={"עריכת משתמש"}/>
                 }
-                {showAddUserDialog ? <AddUser OpenClose={openAddUserDialog}/> : null}
-                {showUpdateUserDialog ? <UpdateUser OpenClose={openUpdateUserDialog} UserToUpdate={userToUpdate}/> : null} 
+                {showAddUserDialog ? <AddUser OpenClose={openAddUserDialog} Token={token}/> : null}
+                {showUpdateUserDialog ? <UpdateUser OpenClose={openUpdateUserDialog} UserToUpdate={userToUpdate} Token={token}/> : null} 
             </div>:
             <div className='NoAccessUsersAlert'>נא להזדהות עבור גישה לנתונים עם הרשאת מנהל</div>}
         </>

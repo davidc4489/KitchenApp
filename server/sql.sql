@@ -113,6 +113,8 @@ CREATE TABLE IF NOT EXISTS menusCalendar (
 
 DROP TABLE menusCalendar
 
+DELETE from users where id = 1;
+
 -- CREATE TABLE IF NOT EXISTS menusForDay (
 --         id INTEGER PRIMARY KEY AUTOINCREMENT,
 --         idDate INTEGER,

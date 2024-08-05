@@ -1,6 +1,6 @@
 export default async function Fetch(path, setter, token = '') {
     try {
-        console.log("token", token)
+        // console.log("token", token)
         // Construire les en-têtes avec le token si fourni
         const headers = {
             'Content-Type': 'application/json',

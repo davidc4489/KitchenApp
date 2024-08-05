@@ -4,14 +4,15 @@ const UserToUpdateContext = createContext();
 
 export const UpdateUserProvider = ({ children }) => {
 
+    const id = localStorage.getItem("id")
     const name = localStorage.getItem("name")
     const email = localStorage.getItem("email")
     const password = localStorage.getItem("password")
     const permission = localStorage.getItem("permission")
-    const id = parseInt(localStorage.getItem("id"))
 
   // Receive user data from user context
   const userSetter = (updatedUser) => {
+    localStorage.setItem("id", updatedUser.id)
     localStorage.setItem("name", updatedUser.שם)
     localStorage.setItem("email", updatedUser.מייל)
     localStorage.setItem("password", updatedUser.סיסמה)

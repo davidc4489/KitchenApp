@@ -1,5 +1,5 @@
 import'./Login.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import UpdatePersonalInformations from './UpdatePersonalInformations.js';
 import { useAuth } from '../../Context/UserContext.jsx';
 import { useUserUpdate } from '../../Context/UserToUpdateContext';
@@ -18,7 +18,7 @@ const Login = () => {
     const [showUpdatePersonalInformationsDialog, setShowUpdatePersonalInformationsDialog] = useState(false)
 
     // Retrieves data and authentication functions from user context
-    const { login, logout, user, access, accessAlert, setAccessAlert } = useAuth();
+    const { login, logout, user, access, accessAlert, setAccessAlert, token } = useAuth();
 
     //  Get active user data from context
     const { name } = useUserUpdate();
@@ -46,7 +46,7 @@ const Login = () => {
 
     return (
         <>
-        {showUpdatePersonalInformationsDialog ? <UpdatePersonalInformations OpenClose={openUpdatePersonalInformationsDialog}/> : null}  
+        {showUpdatePersonalInformationsDialog ? <UpdatePersonalInformations OpenClose={openUpdatePersonalInformationsDialog} Token={token}/> : null}  
         <div className='loginbox shadow-lg p-3 mb-5 bg-body rounded'>
             {/* Case where no user identified */}
             {access !== true?

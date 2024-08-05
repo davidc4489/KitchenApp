@@ -5,6 +5,8 @@ import Input from '../../Tools/Input';
 import Select from '../../Tools/Select';
 
 function AddSupplier(props) {
+
+    const token = props.Token
    
     const [name, setName] = useState("");
     const [tel, setTel] = useState("");
@@ -21,11 +23,11 @@ function AddSupplier(props) {
     const [dataStock, setDataStock] = useState([])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock`, setDataStock)
+        Fetch(`http://localhost:4000/api/stock`, setDataStock, token)
     }, [dataStock])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories, token)
     }, [dataCategories])
 
     function saveData() {
@@ -43,6 +45,7 @@ function AddSupplier(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(addedValues),
         })

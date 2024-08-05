@@ -14,12 +14,16 @@ function Calendar() {
     const [dataMenus, setDataMenus] = useState([])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menus`, setDataMenus, token)
-    }, [dataMenus])
+        if (token) {
+            Fetch(`http://localhost:4000/api/menus`, setDataMenus, token)
+        }
+    }, [dataMenus, token])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar, token)
-    }, [dataMenusCalendar])
+        if (token) {
+            Fetch(`http://localhost:4000/api/menusCalendar`, setDataMenusCalendar, token)
+        }
+    }, [dataMenusCalendar, token])
 
     function isMatchingDate(DataDate, CalendarDate) {
         return (
@@ -92,8 +96,8 @@ function Calendar() {
                     let eventDay
                 
                     for (const ev of events) {
-                        const hd = ev.getDate();
-                        const date = hd.greg();
+                        // const hd = ev.getDate();
+                        // const date = hd.greg();
                         eventDay = ev.render('he-x-NoNikud');
                     }
                     

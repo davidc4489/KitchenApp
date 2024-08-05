@@ -1,10 +1,13 @@
 import React, { useEffect, useState, } from 'react'
 import './UpdateEvent.css'
+import Fetch from '../../Tools/Fetch'
 
 function UpdateEvent (props) {
 
-    const [dataStock, setDataStock] = useState([])
     const eventToUpdate = props.EventToUpdate
+    const token = props.Token
+
+    const [dataStock, setDataStock] = useState([])
 
     const [updateValues, setUpdateValues] = useState({
         day: eventToUpdate.day,
@@ -15,15 +18,11 @@ function UpdateEvent (props) {
     const [dataSuppliers, setDataSuppliers] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/suppliers`)
-        .then(response => response.json())
-        .then(data => setDataSuppliers(data))
+        Fetch(`http://localhost:4000/api/suppliers`, setDataSuppliers, token)
     }, [dataSuppliers])
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/stock`)
-        .then(response => response.json())
-        .then(data => setDataStock(data))
+        Fetch(`http://localhost:4000/api/stock`, setDataStock, token)
     }, [])
 
     function updateData(event) {
@@ -39,6 +38,7 @@ function UpdateEvent (props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(updateValues),
         })

@@ -1,5 +1,8 @@
 import './DeleteVerification.css';
 
+// Generic function to generate a verification message before deleting data by the user.
+// The function receives as an argument the function which allows you to delete the data, 
+//  close the necessary windows, and the message to display to the user
 export default function DeleteVerification ({deleteFunction, OpenClose, CloseBox, Text}) {
     
     function deleteItem(){

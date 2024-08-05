@@ -7,7 +7,7 @@ import Fetch from '../../Tools/Fetch.jsx';
 
 function Notes() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
 
     const [noteToUpdate, setNoteToUpdate] = useState(null)
     const [showAddNoteDialog, setShowAddNoteDialog] = useState(false)
@@ -16,7 +16,7 @@ function Notes() {
     const [dataNotes, setDataNotes] = useState([])
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/notes/`, setDataNotes)
+        Fetch(`http://localhost:4000/api/notes/`, setDataNotes, token)
     }, [dataNotes])
 
     function openAddNoteDialog (){
@@ -54,8 +54,8 @@ function Notes() {
                             </div>
                         ))}
                     </div>
-                    {showAddNoteDialog ? <AddNote OpenClose={openAddNoteDialog}/> : null}
-                    {showUpdateNoteDialog ? <UpdateNote OpenClose={openUpdateNoteDialog} NoteToUpdate={noteToUpdate}/> : null}
+                    {showAddNoteDialog ? <AddNote OpenClose={openAddNoteDialog} Token={token}/> : null}
+                    {showUpdateNoteDialog ? <UpdateNote OpenClose={openUpdateNoteDialog} NoteToUpdate={noteToUpdate} Token={token}/> : null}
                 </div>
             ) : (
                 <div className='alert alert-warning text-center'>נא להזדהות עבור גישה לנתונים</div>

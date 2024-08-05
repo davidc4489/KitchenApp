@@ -6,6 +6,8 @@ import Select from '../../Tools/Select';
 
 function AddUser(props) {
 
+    const token = props.Token
+
     const permissions = [{id: 1, שם: 'מלצר'}, {id: 2, שם: 'עובד מטבח'}, {id: 3, שם: 'מנהל'}]
 
     const [dataUsers, setDataUsers] = useState([])
@@ -34,6 +36,7 @@ function AddUser(props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` })
                 },
                 body: JSON.stringify(addedValues),
             })
@@ -44,7 +47,7 @@ function AddUser(props) {
     }
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/users`, setDataUsers)
+        Fetch(`http://localhost:4000/api/users`, setDataUsers, token)
     }, [dataUsers])
 
     function handleCloseAlert() {
