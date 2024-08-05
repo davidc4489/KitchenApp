@@ -10,6 +10,7 @@ import menusCalendarRoutes from './Routes/menusCalendar.js'
 import suppliersOrdersCalendarRoutes from './Routes/suppliersOrdersCalendar.js'
 import usersRoutes from './Routes/users.js'
 import notesRoutes from './Routes/notes.js'
+import loginRoutes from './Routes/login.js'
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors())
 
 app.use(bodyParser.json());
 
+app.use('/api/login', loginRoutes);
 app.use('/api/stock', stockRoutes);
 app.use('/api/suppliers', suppliersRoutes);
 app.use('/api/menus', menusRoutes);

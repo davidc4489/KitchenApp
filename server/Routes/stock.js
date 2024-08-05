@@ -1,16 +1,16 @@
 import express from "express";
-
+import { authenticateToken } from "../Middleware/middleware.js";
 import {getStock, getCategories, addProduct, updateProduct, removeProduct} from "../Controllers/stock.js";
 
 const router = express.Router();
 
-router.get("/", getStock)
-router.get("/categories", getCategories)
+router.get("/", authenticateToken, getStock)
+router.get("/categories", authenticateToken, getCategories)
 
-router.post("/add", addProduct)
+router.post("/add", authenticateToken, addProduct)
 
-router.put("/:id", updateProduct)
+router.put("/:id", authenticateToken, updateProduct)
 
-router.delete("/:id", removeProduct)
+router.delete("/:id", authenticateToken, removeProduct)
 
 export default router;

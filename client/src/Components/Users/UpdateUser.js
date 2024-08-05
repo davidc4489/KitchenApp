@@ -20,20 +20,6 @@ function UpdateUser(props) {
 
     const [deleteUserBox, setDeleteUserBox] = useState(false)
 
-   
-    // const [updateValues, setUpdateValues] = useState({
-    //     שם: userToUpdate.שם,
-    //     מייל: userToUpdate.מייל,
-    //     סיסמה:  userToUpdate.סיסמה,
-    //     הרשאה: userToUpdate.הרשאה
-    // });
-
-    // function updateData(event) {
-    //     setUpdateValues({
-    //         ...updateValues,
-    //         [event.target.name]: event.target.value,
-    //     })}
-
     function saveData() {
         const updateValues = {
             שם: name,
@@ -78,12 +64,6 @@ function UpdateUser(props) {
         Fetch(`http://localhost:4000/api/users`, setDataUsers)
     }, [dataUsers])
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:4000/api/users`)
-    //     .then(response => response.json())
-    //     .then(data => setDataUsers(data))
-    // }, [dataUsers])
-
     return (
         <>
             <form className='UpdateUser-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
@@ -97,12 +77,6 @@ function UpdateUser(props) {
                     <Input type="text" value={password} onChange={setPassword}/>
                     <label className='UpdateUser-Label'>הרשאה :</label>
                     <Select id='permission' value={permission} onChange={setPermission} title="בחר הרשאה" optionValue='' optionsToMap={permissions} valueToMap="שם"/>
-                    {/* <select name='permission' value={updateValues.permission} onChange={updateData}>
-                        <option value=''>בחר הרשאה</option>
-                        {permissions.map((permission) => 
-                            <option value={permission}>{permission}</option>
-                        )}
-                    </select> */}
                     <div>
                 </div>
                 <div className='UpdateUser-Buttons'>

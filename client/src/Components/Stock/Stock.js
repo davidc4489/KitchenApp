@@ -10,7 +10,7 @@ import Fetch from '../../Tools/Fetch.jsx';
 
 function Stock() {
 
-    const { access } = useAuth();
+    const { access, token } = useAuth();
 
     const [dataStock, setDataStock] = useState([])
     const [category, setCategory] = useState('כל המוצרים')
@@ -35,12 +35,16 @@ function Stock() {
     }
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock`, setDataStock)
-    }, [dataStock])
+        if (token) {
+            Fetch(`http://localhost:4000/api/stock`, setDataStock, token);
+        }
+    }, [token]);
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
-    }, [dataCategories])
+        if (token) {
+            Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories, token);
+        }
+    }, [token]);
 
     return (
         <>
