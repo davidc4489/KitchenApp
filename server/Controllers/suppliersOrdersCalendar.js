@@ -31,7 +31,7 @@ export const getSuppliersOrdersMessages = async (req, res) => {
                         'month': order.month,
                         'year' : order.year,
                         'supplier' : suppliersData.find(supplier => supplier.שם === order.supplier).שם,
-                        'product' : stockData.find(product => product.id === order.idProduct).שם,
+                        'product' : stockData.find(product => product.id === order.idProduct)?.שם,
                         'amount' : order.amount,
                         'unity' : order.unity,
                         'placed' : order.placed,
