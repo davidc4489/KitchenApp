@@ -62,8 +62,8 @@ function Stock() {
                     <Table data={dataStock} values={["שם","קטגוריה", "כשרות", "ספק", "יצרן", "כמות", "יחידה", "כמות_מינימלית"]} category={category} allCategories={"כל המוצרים"} search={search} updateFunction={updateProduct} title={"עריכת מוצר"}/>
                 }               
         
-                {showAddProductDialog ? <AddProduct OpenClose={openAddProductDialog}/> : null}
-                {showUpdateProductDialog ? <UpdateProduct OpenClose={openUpdateProductDialog} ProductToUpdate={productToUpdate}/> : null}   
+                {showAddProductDialog ? <AddProduct OpenClose={openAddProductDialog} Token={token}/> : null}
+                {showUpdateProductDialog ? <UpdateProduct OpenClose={openUpdateProductDialog} ProductToUpdate={productToUpdate} Token={token}/> : null}   
 
             </div>:
             <div className='NoAccessAlert'>נא להזדהות עבור גישה לנתונים</div>}

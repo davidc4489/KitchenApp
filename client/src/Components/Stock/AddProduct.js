@@ -5,6 +5,8 @@ import Input from '../../Tools/Input';
 import Select from '../../Tools/Select';
 
 function AddProduct(props) {
+
+    const token = props.Token
    
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
@@ -20,7 +22,7 @@ function AddProduct(props) {
     const unitsCategories = [{שם: 'ק"ג'},{שם: "ליטר"},{שם: "יחידה"}]
 
     useEffect(() => {
-        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories)
+        Fetch(`http://localhost:4000/api/stock/categories`, setDataCategories, token)
     }, [dataCategories])
 
     function saveData() {
@@ -38,6 +40,7 @@ function AddProduct(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
             },
             body: JSON.stringify(addedValues),
         })
