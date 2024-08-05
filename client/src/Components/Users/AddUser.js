@@ -1,29 +1,33 @@
 import React, { useEffect, useState, } from 'react'
 import './AddUser.css'
+import Fetch from '../../Tools/Fetch';
+import Input from '../../Tools/Input';
+import Select from '../../Tools/Select';
 
 function AddUser(props) {
 
-    const permissions = ['מלצר', 'עובד מטבח', 'מנהל']
+    const permissions = [{id: 1, שם: 'מלצר'}, {id: 2, שם: 'עובד מטבח'}, {id: 3, שם: 'מנהל'}]
 
     const [dataUsers, setDataUsers] = useState([])
-   
-    const [addValues, setAddValues] = useState({
-        שם: '',
-        מייל: '',
-        סיסמה:  '',
-        הרשאה:  ''
-    });
 
-    function updateData(event) {
-        setAddValues({
-            ...addValues,
-            [event.target.name]: event.target.value
-        })
-    }
+    const [name, setName] = useState("");
+    const [mail, setMail] = useState("");
+    const [password, setPassword] = useState("");
+    const [permission, setPermission] = useState("");
 
-    function saveData() {
-        if (dataUsers.find(user => user.שם === addValues.שם)){
-            alert("שם משתמש כבר קיים !")
+    const [alert, setAlert] = useState(null);
+
+    function saveData(event) {
+        event.preventDefault();
+        
+        const addedValues = {
+            שם: name,
+            מייל: mail,
+            סיסמה: password,
+            הרשאה: permission
+        };
+        if (dataUsers.find(user => user.שם === addedValues.שם)){
+            setAlert({ message: "שם משתמש כבר קיים", type: "danger" });
         }
         else{
             fetch('http://localhost:4000/api/users/add', {
@@ -31,43 +35,47 @@ function AddUser(props) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(addValues),
+                body: JSON.stringify(addedValues),
             })
                 .then(response => {response.json()
-    })}}
+            })
+            props.OpenClose()
+        }
+    }
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/users`)
-        .then(response => response.json())
-        .then(data => setDataUsers(data))
+        Fetch(`http://localhost:4000/api/users`, setDataUsers)
     }, [dataUsers])
 
-    return (
-        <div className='AddUser-box'>
-            <form className='AddUser-Box-Content'>
-                <div className='AddUser-Title'>הוספת משתמש</div>
-                <div className='AddUser-InputBox'>
-                    <label className='AddUser-Label'>שם: </label>
-                    <input className='AddUserPage-Input' type="text" name='שם' value={addValues.שם} onChange={updateData} required /> 
-                    <label className='AddUser-Label'>מייל: </label>
-                    <input className='AddUserPage-Input' type="email" name='מייל' value={addValues.מייל} onChange={updateData} required/>
-                    <label className='AddUser-Label'>סיסמה: </label>
-                    <input className='AddUserPage-Input' type="text" name='סיסמה' value={addValues.סיסמה} onChange={updateData} required/>
-                    <label className='AddUser-Label'>הרשאה :</label>
-                    <select name='permission' value={addValues.הרשאה} onChange={updateData} required>
-                        <option value=''>בחר הרשאה</option>
-                        {permissions.map((permission) => 
-                             <option value={permission}>{permission}</option>
-                        )}
-                    </select> 
-                </div>
+    function handleCloseAlert() {
+        setAlert(null);
+    }
 
-                    <div className='AddUser-Buttons'>
-                        <button className='AddUser-Button' onClick={props.OpenClose}>ביטול</button>
-                        <input type="submit" value={'שמירה'} className='AddUser-Button' onClick={saveData}></input>
-                    </div>
-            </form>
-        </div>
+    return (
+        <form className='AddUser-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
+            <div className='AddUser-Title'>הוספת משתמש</div>
+            {alert && (
+                <div className={`alert alert-${alert.type} alert-dismissible fade show`} role="alert">
+                    {alert.message}
+                    <button type="button" className="btn-close" aria-label="Close" onClick={handleCloseAlert}></button>
+                </div>
+            )}
+            <div className='AddUser-InputBox'>
+                <label className='AddUser-Label'>שם: </label>
+                <Input type="text" value={name} onChange={setName}/> 
+                <label className='AddUser-Label'>מייל: </label>
+                <Input type="email" value={mail} onChange={setMail}/>
+                <label className='AddUser-Label'>סיסמה: </label>
+                <Input type="text" value={password} onChange={setPassword}/>
+                <label className='AddUser-Label'>הרשאה :</label>
+                <Select id='permission' value={permission} onChange={setPermission} title="בחר הרשאה" optionValue='' optionsToMap={permissions} valueToMap="שם"/>
+            </div>
+            <div className='AddUser-Buttons'>
+                <button className='AddDish-Button btn btn-outline-danger' onClick={props.OpenClose}>ביטול</button>
+                <button type="submit" value={'שמירה'} className='AddDish-Button btn btn-outline-primary' onClick={saveData}>שמירה</button>
+
+            </div>
+        </form>
     )
 }
 

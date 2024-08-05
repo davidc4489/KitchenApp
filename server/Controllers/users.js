@@ -20,7 +20,7 @@ export const addUser = (req, res) => {
 }
 
 export const updateUser = (req,res) => {
-    let newData = {id:parseInt(req.body.idUpdate)}
+    let newData = {id:req.params.id}
     if (req.body.שם){ newData.שם = req.body.שם}
     if (req.body.מייל){ newData.מייל = req.body.מייל}
     if (req.body.סיסמה){ newData.סיסמה = req.body.סיסמה}

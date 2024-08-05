@@ -1,28 +1,47 @@
 import React, { useEffect, useState, } from 'react'
 import './UpdateUser.css'
 import validator from "validator";
+import Fetch from '../../Tools/Fetch';
+import Input from '../../Tools/Input';
+import Select from '../../Tools/Select';
+import DeleteVerification from '../../Tools/DeleteVerification.jsx';
 
 function UpdateUser(props) {
 
     const userToUpdate = props.UserToUpdate
-    const permissions = ['מלצר', 'עובד מטבח', 'מנהל']
+    const permissions = [{id: 1, שם: 'מלצר'}, {id: 2, שם: 'עובד מטבח'}, {id: 3, שם: 'מנהל'}]
 
     const [dataUsers, setDataUsers] = useState([])
-   
-    const [updateValues, setUpdateValues] = useState({
-        שם: userToUpdate.שם,
-        מייל: userToUpdate.מייל,
-        סיסמה:  userToUpdate.סיסמה,
-        הרשאה: userToUpdate.הרשאה
-    });
 
-    function updateData(event) {
-        setUpdateValues({
-            ...updateValues,
-            [event.target.name]: event.target.value,
-        })}
+    const [name, setName] = useState(userToUpdate.שם);
+    const [mail, setMail] = useState(userToUpdate.מייל);
+    const [password, setPassword] = useState(userToUpdate.סיסמה);
+    const [permission, setPermission] = useState(userToUpdate.הרשאה);
+
+    const [deleteUserBox, setDeleteUserBox] = useState(false)
+
+   
+    // const [updateValues, setUpdateValues] = useState({
+    //     שם: userToUpdate.שם,
+    //     מייל: userToUpdate.מייל,
+    //     סיסמה:  userToUpdate.סיסמה,
+    //     הרשאה: userToUpdate.הרשאה
+    // });
+
+    // function updateData(event) {
+    //     setUpdateValues({
+    //         ...updateValues,
+    //         [event.target.name]: event.target.value,
+    //     })}
 
     function saveData() {
+        const updateValues = {
+            שם: name,
+            מייל: mail,
+            סיסמה: password,
+            הרשאה: permission
+        };
+
         if (dataUsers.find(user => (user.שם === updateValues.שם && userToUpdate.שם !== updateValues.שם))){
             alert("שם משתמש כבר קיים")
         }
@@ -38,6 +57,11 @@ function UpdateUser(props) {
                 .then(response => {response.json()})
     }}
 
+    function deleteUserDisplay(event) {
+        event.preventDefault();
+        setDeleteUserBox(true);
+    }
+
     function deleteUser() {
         props.OpenClose()
         fetch(`http://localhost:4000/api/users/${userToUpdate.id}`, {
@@ -51,40 +75,45 @@ function UpdateUser(props) {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/users`)
-        .then(response => response.json())
-        .then(data => setDataUsers(data))
+        Fetch(`http://localhost:4000/api/users`, setDataUsers)
     }, [dataUsers])
 
+    // useEffect(() => {
+    //     fetch(`http://localhost:4000/api/users`)
+    //     .then(response => response.json())
+    //     .then(data => setDataUsers(data))
+    // }, [dataUsers])
+
     return (
-        <div className='UpdateUser-box'>
-            <form className='UpdateUser-Box-Content'>
+        <>
+            <form className='UpdateUser-Box-Content shadow-lg p-3 mb-5 bg-body rounded'>
                 <div className='UpdateUser-Title'>עריכת משתמש</div>
                 <div className='UpdateUser-InputBox'>
                     <label className='UpdateUser-Label'>שם :</label>
-                    <input className='UpdateUserPage-Input' type="text" name='שם' value={updateValues.שם} onChange={updateData} required pattern=".*\S+.*" title="This field is required"/> 
+                    <Input type="text" value={name} onChange={setName}/> 
                     <label className='UpdateUser-Label'>מייל :</label>
-                    <input className='UpdateUserPage-Input' type="email" name='מייל' value={updateValues.מייל} onChange={updateData} required pattern=".*\S+.*" title="This field is required"/>
+                    <Input type="email" value={mail} onChange={setMail}/>
                     <label className='UpdateUser-Label'>סיסמה :</label>
-                    <input className='UpdateUserPage-Input' name='סיסמה' value={updateValues.סיסמה} onChange={updateData} required pattern=".*\S+.*" title="This field is required"/>
+                    <Input type="text" value={password} onChange={setPassword}/>
                     <label className='UpdateUser-Label'>הרשאה :</label>
-                   <select name='permission' value={updateValues.permission} onChange={updateData}>
+                    <Select id='permission' value={permission} onChange={setPermission} title="בחר הרשאה" optionValue='' optionsToMap={permissions} valueToMap="שם"/>
+                    {/* <select name='permission' value={updateValues.permission} onChange={updateData}>
                         <option value=''>בחר הרשאה</option>
                         {permissions.map((permission) => 
                             <option value={permission}>{permission}</option>
                         )}
-                    </select>
+                    </select> */}
                     <div>
                 </div>
-
-                    <div className='UpdateUser-Buttons'>
-                        <button className='UpdateUser-Button' onClick={props.OpenClose}>ביטול</button>
-                        <button className='UpdateUser-Button' onClick={deleteUser}>מחיקת משתמש</button>
-                        <input type='submit' value={'שמירה'} className='UpdateUser-Button' onClick={saveData}></input>
-                    </div>
+                <div className='UpdateUser-Buttons'>
+                    <button className='AddDish-Button btn btn-outline-danger' onClick={deleteUserDisplay}>מחיקת משתמש</button>
+                    <input type='submit' value={'שמירה'} className='AddDish-Button btn btn-outline-primary' onClick={saveData}></input>
+                    <button className='AddDish-Button btn btn-outline-secondary' onClick={props.OpenClose}>ביטול</button>
+                </div>
                 </div>
             </form>
-        </div>
+            {deleteUserBox ? <DeleteVerification deleteFunction={deleteUser} OpenClose={props.OpenClose} CloseBox={setDeleteUserBox} Text={"? למחוק את המוצר"}/> : null}
+        </>
     )
 }
 
